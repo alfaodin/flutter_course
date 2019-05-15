@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'dart:math';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -14,22 +15,80 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'test',
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-        cardColor: Color.fromARGB(140, 255, 0, 0),
-      ),
-      // home: Scaffold(
-      //   appBar: AppBar(
-      //     title: Text('Hello World'),
-      //   ),
-      //   body: ProductManager(['test']),
-      // ),
-      home: PhotoList(),
+        title: 'test',
+        theme: ThemeData(
+          primarySwatch: Colors.deepOrange,
+          cardColor: Color.fromARGB(140, 255, 0, 0),
+        ),
+        // home: Scaffold(
+        //   appBar: AppBar(
+        //     title: Text('Hello World'),
+        //   ),
+        //   body: ProductManager(['test']),
+        // ),
+        // HTTP TEST
+        //home: PhotoList(),
+        home: TextController());
+  }
+}
+
+//************************ EXERCISE ****************************/
+class TextController extends StatefulWidget {
+  const TextController({Key key}) : super(key: key);
+
+  @override
+  _TextControllerState createState() => _TextControllerState();
+}
+
+class _TextControllerState extends State<TextController> {
+  String changeText = '';
+
+  @override
+  void initState() {
+    super.initState();
+    changeText = ' Hello World';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 10.0),
+            child: MyText(changeText)),
+        Container(
+            padding: EdgeInsets.all(8.0),
+            child: RaisedButton(
+              color: Theme.of(context).primaryColorLight,
+              child: Text('Cambia texto'),
+              onPressed: () => {
+                    setState(() => {changeText = getNewString()}),
+                  },
+            )),
+      ],
+    );
+  }
+
+  String getNewString() {
+    Random rng = new Random();
+    return rng.nextInt(100).toString() + 'QUE TAL';
+  }
+}
+
+class MyText extends StatelessWidget {
+  final String text;
+
+  MyText(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(text),
     );
   }
 }
 
+//************************ HTPP REQUEST ****************************/
 class PhotoList extends StatefulWidget {
   @override
   PhotoListState createState() => PhotoListState();
