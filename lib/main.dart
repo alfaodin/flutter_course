@@ -4,6 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'package:flutter/rendering.dart';
+
 import 'package:hello_world/product_manager.dart';
 
 main() {
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      debugShowMaterialGrid: true,
       title: 'test',
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
