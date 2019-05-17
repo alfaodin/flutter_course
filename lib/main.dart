@@ -15,20 +15,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        title: 'test',
-        theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
-          cardColor: Color.fromARGB(140, 255, 0, 0),
+      title: 'test',
+      theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
+        cardColor: Color.fromARGB(140, 255, 0, 0),
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Hello World'),
         ),
-        // home: Scaffold(
-        //   appBar: AppBar(
-        //     title: Text('Hello World'),
-        //   ),
-        //   body: ProductManager(['test']),
-        // ),
-        // HTTP TEST
-        //home: PhotoList(),
-        home: TextController());
+        body: ProductManager(['test']),
+      ),
+      // HTTP TEST
+      //home: PhotoList(),
+      // Exercise
+      //home: TextController()
+    );
   }
 }
 
@@ -51,21 +53,23 @@ class _TextControllerState extends State<TextController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 10.0),
-            child: MyText(changeText)),
-        Container(
-            padding: EdgeInsets.all(8.0),
-            child: RaisedButton(
-              color: Theme.of(context).primaryColorLight,
-              child: Text('Cambia texto'),
-              onPressed: () => {
-                    setState(() => {changeText = getNewString()}),
-                  },
-            )),
-      ],
+    return Center(
+      child: Column(
+        children: <Widget>[
+          Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 10.0),
+              child: MyText(changeText)),
+          Container(
+              padding: EdgeInsets.all(8.0),
+              child: RaisedButton(
+                color: Theme.of(context).primaryColorLight,
+                child: Text('Cambia texto'),
+                onPressed: () => {
+                      setState(() => {changeText = getNewString()}),
+                    },
+              )),
+        ],
+      ),
     );
   }
 
