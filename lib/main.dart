@@ -7,9 +7,10 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter/rendering.dart';
 
-import 'package:hello_world/product_manager.dart';
+import './pages/home.dart';
 
 main() {
+  //debugPaintSizeEnabled = true;
   runApp(new MyApp());
 }
 
@@ -17,18 +18,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      debugShowMaterialGrid: true,
+      //debugShowMaterialGrid: true,
       title: 'test',
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
         cardColor: Color.fromARGB(140, 255, 0, 0),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Hello World'),
-        ),
-        body: ProductManager(['test']),
-      ),
+      home: Home(),
       // HTTP TEST
       //home: PhotoList(),
       // Exercise
@@ -139,7 +135,6 @@ class PhotoListState extends State<PhotoList> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text('Stramed photos'),
