@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/pages/page-view/components/onboard_page.dart';
+import 'package:hello_world/pages/page-view/data/onboard-page-dat.dart';
 
 class IntroducctionPage extends StatelessWidget {
   const IntroducctionPage({Key key}) : super(key: key);
@@ -9,15 +10,16 @@ class IntroducctionPage extends StatelessWidget {
     return Stack(
       children: <Widget>[
         PageView.builder(
-          itemCount: 4,
+          itemCount: onboardData.length,
           itemBuilder: (context, index) {
-            return OnboardPageState();
+            return OnboardPageState(
+              pageModel: onboardData[index],
+            );
           },
         ),
         Container(
           width: double.infinity,
           height: 60,
-          color: Colors.red,
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Row(
