@@ -3,16 +3,19 @@ import 'package:hello_world/pages/page-view/components/onboard_page.dart';
 import 'package:hello_world/pages/page-view/data/onboard-page-dat.dart';
 
 class IntroducctionPage extends StatelessWidget {
-  const IntroducctionPage({Key key}) : super(key: key);
+  final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         PageView.builder(
+          controller: pageController,
+          //physics: NeverScrollableScrollPhysics(),
           itemCount: onboardData.length,
           itemBuilder: (context, index) {
             return OnboardPageState(
+              pageController: pageController,
               pageModel: onboardData[index],
             );
           },

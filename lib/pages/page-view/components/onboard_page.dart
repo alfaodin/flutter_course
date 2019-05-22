@@ -1,15 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/animation.dart';
+
 import 'package:hello_world/pages/page-view/drawer-paint.dart';
 import 'package:hello_world/pages/page-view/model/onboard-page-model.dart';
 
 class OnboardPageState extends StatefulWidget {
   final OnboardPageModel pageModel;
-  const OnboardPageState({Key key, this.pageModel}) : super(key: key);
+  final PageController pageController;
+
+  const OnboardPageState(
+      {Key key, @required this.pageController, @required this.pageModel})
+      : super(key: key);
+
   @override
   _OnboardPageStateState createState() => _OnboardPageStateState();
 }
 
-class _OnboardPageStateState extends State<OnboardPageState> {
+class _OnboardPageStateState extends State<OnboardPageState>
+    with SingleTickerProviderStateMixin {
+  Animation<double> heroAnimation;
+  AnimationController animationController;
+
+  @override
+  void initState() {
+    animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 750));
+    heroAnimation = Tween<double>(begin: -40, end: 0).animate(
+        CurvedAnimation(parent: animationController, curve: Curves.bounceOut));
+
+    animationController.forward(from: 0);
+    super.initState();
+  }
+
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -19,9 +46,17 @@ class _OnboardPageStateState extends State<OnboardPageState> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 32),
-                child: Image.asset(widget.pageModel.imagePath),
+              AnimatedBuilder(
+                animation: heroAnimation,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(heroAnimation.value, 0),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 32),
+                      child: Image.asset(widget.pageModel.imagePath),
+                    ),
+                  );
+                },
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32),
@@ -100,6 +135,9 @@ class _OnboardPageStateState extends State<OnboardPageState> {
   }
 
   void _nexButtonPressed() {
-    print('esta es una prueba');
+    widget.pageController.nextPage(
+      duration: Duration(milliseconds: 200),
+      curve: Curves.fastLinearToSlowEaseIn,
+    );
   }
 }

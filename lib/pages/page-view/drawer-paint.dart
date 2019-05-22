@@ -16,7 +16,7 @@ class DrawerPaint extends CustomPainter {
 
     path.moveTo(35, 0);
     path.relativeCubicTo(25, diameter * .4, -15, diameter / 2, 0, diameter);
-    path.relativeCubicTo(30, diameter * .6, -15, diameter / 2, 0, diameter);
+    path.relativeCubicTo(30, diameter * .6, -25, diameter / 2, 0, diameter);
     path.relativeCubicTo(35, diameter * .7, -80, diameter * 0.7, 0, diameter);
 
     path.lineTo(size.width, size.height);
