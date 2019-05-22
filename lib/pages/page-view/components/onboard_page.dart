@@ -19,6 +19,7 @@ class OnboardPageState extends StatefulWidget {
 class _OnboardPageStateState extends State<OnboardPageState>
     with SingleTickerProviderStateMixin {
   Animation<double> heroAnimation;
+  Animation<double> borderAnimation;
   AnimationController animationController;
 
   @override
@@ -26,6 +27,9 @@ class _OnboardPageStateState extends State<OnboardPageState>
     animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 750));
     heroAnimation = Tween<double>(begin: -40, end: 0).animate(
+        CurvedAnimation(parent: animationController, curve: Curves.bounceOut));
+
+    borderAnimation = Tween<double>(begin: 75, end: 50).animate(
         CurvedAnimation(parent: animationController, curve: Curves.bounceOut));
 
     animationController.forward(from: 0);
@@ -110,24 +114,29 @@ class _OnboardPageStateState extends State<OnboardPageState>
         ),
         Align(
           alignment: Alignment.centerRight,
-          child: CustomPaint(
-            painter: DrawerPaint(curveColor: widget.pageModel.accentColor),
-            child: Container(
-              width: 50,
-              height: double.infinity,
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    color: widget.pageModel.primeColor,
-                    iconSize: 32,
-                    onPressed: _nexButtonPressed,
+          child: AnimatedBuilder(
+            animation: borderAnimation,
+            builder: (context, child) {
+              return CustomPaint(
+                painter: DrawerPaint(curveColor: widget.pageModel.accentColor),
+                child: Container(
+                  width: borderAnimation.value,
+                  height: double.infinity,
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_back),
+                        color: widget.pageModel.primeColor,
+                        iconSize: 32,
+                        onPressed: _nexButtonPressed,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         )
       ],
