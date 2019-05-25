@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/pages/page-view/components/onboard_page.dart';
+import 'package:hello_world/pages/page-view/components/page_indicator.dart';
 import 'package:hello_world/pages/page-view/data/onboard-page-dat.dart';
+import 'package:hello_world/pages/page-view/providers/color_provider.dart';
+
+import 'package:provider/provider.dart';
 
 class IntroducctionPage extends StatelessWidget {
   final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
+    ColorProvider colorProvider = Provider.of<ColorProvider>(context);
     return Stack(
       children: <Widget>[
         PageView.builder(
@@ -37,7 +42,7 @@ class IntroducctionPage extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .title
-                        .copyWith(color: Colors.black),
+                        .copyWith(color: colorProvider.color),
                   ),
                 ),
                 Padding(
@@ -47,10 +52,21 @@ class IntroducctionPage extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .title
-                        .copyWith(color: Colors.black),
+                        .copyWith(color: colorProvider.color),
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 80.0, left: 50.0),
+            child: PageViewIndicator(
+              controller: pageController,
+              itemCout: onboardData.length,
+              color: colorProvider.color,
             ),
           ),
         )

@@ -3,6 +3,9 @@ import 'package:flutter/animation.dart';
 
 import 'package:hello_world/pages/page-view/drawer-paint.dart';
 import 'package:hello_world/pages/page-view/model/onboard-page-model.dart';
+import 'package:hello_world/pages/page-view/providers/color_provider.dart';
+
+import 'package:provider/provider.dart';
 
 class OnboardPageState extends StatefulWidget {
   final OnboardPageModel pageModel;
@@ -144,6 +147,8 @@ class _OnboardPageStateState extends State<OnboardPageState>
   }
 
   void _nexButtonPressed() {
+    Provider.of<ColorProvider>(context).color =
+        widget.pageModel.nextAccentColor;
     widget.pageController.nextPage(
       duration: Duration(milliseconds: 200),
       curve: Curves.fastLinearToSlowEaseIn,
