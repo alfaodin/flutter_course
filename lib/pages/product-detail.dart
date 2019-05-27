@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({Key key}) : super(key: key);
+  final String title;
+  final String imageUrl;
+
+  const ProductDetail(this.title, this.imageUrl);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Product Detail'),
+          title: Text(title),
         ),
         body: Center(
-          child: Text('Welcome to product detail'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(imageUrl),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Text(title),
+              ),
+              RaisedButton(
+                color: Theme.of(context).accentColor,
+                child: Text('Back'),
+                onPressed: () => Navigator.pop(context),
+              )
+            ],
+          ),
         ),
       ),
     );

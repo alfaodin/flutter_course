@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/pages/product-detail.dart';
 
 class Products extends StatelessWidget {
-  final List<String> _products;
+  final List<Map<String, String>> _products;
 
-  Products(this._products) {
+  Products([this._products = const []]) {
     print('Product constructor');
   }
 
@@ -25,9 +25,9 @@ class Products extends StatelessWidget {
     return Card(
       child: Column(
         children: <Widget>[
-          Image.asset('assets/food.jpg'),
+          Image.asset(_products[index]['image']),
           Text(
-            _products[index].toUpperCase(),
+            _products[index]['title'].toUpperCase(),
             style: TextStyle(
                 color: Colors.yellow,
                 fontSize: 32,
@@ -36,12 +36,15 @@ class Products extends StatelessWidget {
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlatButton(
+              RaisedButton(
                 child: Text('Details'),
                 onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => ProductDetail(),
+                        builder: (BuildContext context) => ProductDetail(
+                              _products[index]['title'],
+                              _products[index]['image'],
+                            ),
                       ),
                     ),
               )
