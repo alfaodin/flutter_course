@@ -36,7 +36,7 @@ class Products extends StatelessWidget {
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlatButton(
+              RaisedButton(
                 child: Text('Details'),
                 onPressed: () => Navigator.push(
                       context,

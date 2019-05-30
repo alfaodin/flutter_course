@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/pages/page-view/components/onboard_page.dart';
-import 'package:hello_world/pages/page-view/components/page_indicator.dart';
-import 'package:hello_world/pages/page-view/data/onboard-page-dat.dart';
-import 'package:hello_world/pages/page-view/providers/color_provider.dart';
-
 import 'package:provider/provider.dart';
+
+import 'package:hello_world/product_manager.dart';
+import 'package:hello_world/pages/page-view/data/onboard-page-dat.dart';
+import 'package:hello_world/pages/page-view/components/onboard_page.dart';
+import 'package:hello_world/pages/page-view/providers/color_provider.dart';
+import 'package:hello_world/pages/page-view/components/page_indicator.dart';
 
 class IntroducctionPage extends StatelessWidget {
   final PageController pageController = PageController();
@@ -16,7 +17,7 @@ class IntroducctionPage extends StatelessWidget {
       children: <Widget>[
         PageView.builder(
           controller: pageController,
-          //physics: NeverScrollableScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
           itemCount: onboardData.length,
           itemBuilder: (context, index) {
             return OnboardPageState(
@@ -47,12 +48,20 @@ class IntroducctionPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 32),
-                  child: Text(
-                    'Skip',
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(color: colorProvider.color),
+                  child: InkWell(
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => ProductManager(),
+                          ),
+                        ),
+                    child: Text(
+                      'Skip',
+                      style: Theme.of(context)
+                          .textTheme
+                          .title
+                          .copyWith(color: colorProvider.color),
+                    ),
                   ),
                 ),
               ],
