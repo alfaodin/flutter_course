@@ -11,12 +11,12 @@ class ProductDetail extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(title),
+          title: Text("Detalle de $title"),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               Image.asset(imageUrl),
               Container(
@@ -25,8 +25,8 @@ class ProductDetail extends StatelessWidget {
               ),
               RaisedButton(
                 color: Theme.of(context).accentColor,
-                child: Text('Back'),
-                onPressed: () => Navigator.pop(context),
+                child: Text('Delete'),
+                onPressed: () => Navigator.pop(context, true),
               )
             ],
           ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ProductControl extends StatelessWidget {
@@ -9,9 +11,11 @@ class ProductControl extends StatelessWidget {
     return Container(
       child: RaisedButton(
         color: Theme.of(context).primaryColor,
-        onPressed: () => {
+        onPressed: () {
+              int rndNum = Random(1).nextInt(10);
+              
               _addProductFunc(
-                  {'title': 'Advanced food', 'image': 'assets/food.jpg'})
+                  {'title': 'Advanced food $rndNum', 'image': 'assets/food.jpg'});
             },
         child: Text(
           'Add product'.toUpperCase(),
