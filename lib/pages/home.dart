@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:hello_world/pages/page-view/introduction.dart';
 import 'package:hello_world/pages/page-view/providers/color_provider.dart';
-import 'package:hello_world/pages/page-view/splash.dart';
-import '../product_manager.dart';
 import 'package:hello_world/pages/page-view/introduction.dart';
 import 'package:provider/provider.dart';
 

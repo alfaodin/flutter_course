@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/pages/auth.dart';
 import 'package:provider/provider.dart';
 
-import 'package:hello_world/product_manager.dart';
 import 'package:hello_world/pages/page-view/data/onboard-page-dat.dart';
 import 'package:hello_world/pages/page-view/components/onboard_page.dart';
 import 'package:hello_world/pages/page-view/providers/color_provider.dart';
@@ -52,7 +52,7 @@ class IntroducctionPage extends StatelessWidget {
                     onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (BuildContext context) => ProductManager(),
+                            builder: (BuildContext context) => AuthPage(),
                           ),
                         ),
                     child: Text(
