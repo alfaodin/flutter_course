@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/pages/products/product_admin.dart';
 
 import './products.dart';
 import './product_control.dart';
@@ -44,6 +45,45 @@ class _ProductManagerState extends State<ProductManager> {
     return _buidExpandedContainer();
   }
 
+  Widget _buidExpandedContainer() {
+    return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            AppBar(
+              automaticallyImplyLeading: false,
+              title: Text('Choose an Item'),
+            ),
+            ListTile(
+              title: Text('Manage Product'),
+              onTap: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => ProductAdmin(),
+                    ),
+                  ),
+            )
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        title: Text('Products'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.all(10.0),
+            child: ProductControl(_addProduct),
+          ),
+          Expanded(
+            child: Products(_products, deleteProductFunc: _deleteProduct),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buidLiftUpWidget() {
     return Column(
       children: <Widget>[
@@ -53,21 +93,6 @@ class _ProductManagerState extends State<ProductManager> {
           child: ProductControl(_addProduct),
         ),
         Container(height: 150, child: Products(_products)),
-      ],
-    );
-  }
-
-  Widget _buidExpandedContainer() {
-    return Column(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(20),
-          margin: EdgeInsets.all(10.0),
-          child: ProductControl(_addProduct),
-        ),
-        Expanded(
-          child: Products(_products, deleteProductFunc: _deleteProduct),
-        ),
       ],
     );
   }
