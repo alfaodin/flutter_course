@@ -46,10 +46,10 @@ class IndicatorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    _drawCircle(canvas, 0, Offset(0, size.height / 2));
-    _drawCircle(canvas, 1, Offset(size.width / 3, size.height / 2));
-    _drawCircle(canvas, 2, Offset(size.width / 3 * 2, size.height / 2));
-    _drawCircle(canvas, 3, Offset(size.width, size.height / 2));
+    _drawCircle(canvas, 0, Offset(30, size.height / 2));
+    _drawCircle(canvas, 1, Offset((size.width / 3 + 10), size.height / 2));
+    _drawCircle(canvas, 2, Offset((size.width / 3 + 10) * 2, size.height / 2));
+    _drawCircle(canvas, 3, Offset(size.width + 10, size.height / 2));
   }
 
   @override
@@ -60,10 +60,15 @@ class IndicatorPainter extends CustomPainter {
 
   _drawCircle(Canvas canvas, int indicator, Offset offset) {
     if (indicator == currentIndicator + 1) {
-      // Rect rect = Rect.fromPoints( (center: offset, radius: 1);
-      // canvas.drawRect(rect, dotPaint);
-      canvas.drawCircle(offset, _BIGDOT, dotPaint);
+      Path path = Path();
+      path.addRRect(RRect.fromRectAndRadius(
+          Rect.fromLTWH(0, offset.dy - 3, 20, 6), Radius.circular(10)));
+
+      dotPaint.color = Colors.deepOrange;
+      canvas.drawPath(path, dotPaint);
+      // canvas.drawCircle(offset, _BIGDOT, dotPaint);
     } else {
+      dotPaint.color = this.color;
       canvas.drawCircle(offset, _SMALLDOT, dotPaint);
     }
   }

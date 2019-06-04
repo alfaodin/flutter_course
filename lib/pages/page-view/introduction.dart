@@ -17,7 +17,7 @@ class IntroducctionPage extends StatelessWidget {
       children: <Widget>[
         PageView.builder(
           controller: pageController,
-          physics: NeverScrollableScrollPhysics(),
+          // physics: NeverScrollableScrollPhysics(),
           itemCount: onboardData.length,
           itemBuilder: (context, index) {
             return OnboardPageState(
