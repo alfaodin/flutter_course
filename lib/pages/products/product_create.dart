@@ -5,8 +5,10 @@ class ProductCreate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Create Product'),
+    return Center(
+      child: Container(
+        child: Text('Create Product'),
+      ),
     );
   }
 }

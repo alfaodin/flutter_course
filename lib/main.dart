@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/pages/product-detail.dart';
+import 'package:hello_world/pages/products/product_admin.dart';
+import 'package:hello_world/product_manager.dart';
 
 import 'dart:math';
 import 'dart:async';
@@ -24,7 +27,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
         cardColor: Color.fromARGB(140, 255, 0, 0),
       ),
-      home: Home(),
+      //home: Home(),
+      routes: {
+        '/': (BuildContext context) => ProductManager(),
+        '/admin': (BuildContext context) => ProductAdmin(),
+      },
       // HTTP TEST
       //home: PhotoList(),
       // Exercise

@@ -56,12 +56,7 @@ class _ProductManagerState extends State<ProductManager> {
             ),
             ListTile(
               title: Text('Manage Product'),
-              onTap: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => ProductAdmin(),
-                    ),
-                  ),
+              onTap: () => Navigator.pushReplacementNamed(context, '/admin'),
             )
           ],
         ),
