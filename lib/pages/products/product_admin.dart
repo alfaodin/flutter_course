@@ -21,12 +21,8 @@ class ProductAdmin extends StatelessWidget {
                   Text('BACK'),
                   RaisedButton(
                     child: Text('Return to menu'),
-                    onPressed: () => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (BuildContext contex) {
-                            return ProductManager();
-                          }),
-                        ),
+                    onPressed: () =>
+                        Navigator.pushReplacementNamed(context, '/'),
                   ),
                 ],
               ),
