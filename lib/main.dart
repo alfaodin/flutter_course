@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/pages/auth.dart';
 import 'package:hello_world/pages/product-detail.dart';
 
 import 'package:hello_world/product_manager.dart';
@@ -22,9 +23,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final List<Map<String, String>> _products = [];
+  final List<Map<String, dynamic>> _products = [];
 
-  void _addProduct(Map<String, String> product) {
+  void _addProduct(Map<String, dynamic> product) {
     setState(() => _products.add(product));
   }
 
@@ -45,9 +46,12 @@ class _MyAppState extends State<MyApp> {
       ),
       //home: Home(),
       routes: {
-        '/': (BuildContext context) =>
+        '/': (BuildContext context) => AuthPage(),
+        '/manager': (BuildContext context) =>
             ProductManager(_products, _addProduct, _deleteProduct),
-        '/admin': (BuildContext context) => ProductAdmin(),
+        '/admin': (BuildContext context) => ProductAdmin(
+              createProductCallback: _addProduct,
+            ),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');

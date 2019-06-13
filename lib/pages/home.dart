@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:hello_world/pages/page-view/introduction.dart';
 import 'package:hello_world/pages/page-view/providers/color_provider.dart';
-import 'package:hello_world/pages/page-view/introduction.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   const Home({Key key}) : super(key: key);

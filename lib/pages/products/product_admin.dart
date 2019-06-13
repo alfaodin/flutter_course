@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hello_world/pages/products/product_create.dart';
 import 'package:hello_world/pages/products/product_list.dart';
-import 'package:hello_world/product_manager.dart';
 
 class ProductAdmin extends StatelessWidget {
-  const ProductAdmin({Key key}) : super(key: key);
+  final Function createProductCallback;
+
+  const ProductAdmin({Key key, this.createProductCallback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,9 @@ class ProductAdmin extends StatelessWidget {
           ),
           body: TabBarView(
             children: <Widget>[
-              ProductCreate(),
+              ProductCreate(
+                createProductCallback: createProductCallback,
+              ),
               ProductList(),
             ],
           )),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProductCreate extends StatefulWidget {
-  const ProductCreate({Key key}) : super(key: key);
+  final Function createProductCallback;
+
+  const ProductCreate({Key key, this.createProductCallback}) : super(key: key);
 
   @override
   _ProductCreateState createState() => _ProductCreateState();
@@ -16,8 +18,7 @@ class _ProductCreateState extends State<ProductCreate> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: ListView(
         children: <Widget>[
           TextField(
             autofocus: true,
@@ -73,20 +74,43 @@ class _ProductCreateState extends State<ProductCreate> {
               )
             ],
           ),
+          SizedBox(
+            height: 40,
+          ),
           Center(
             child: Container(
-              child: RaisedButton(
-                child: Text('Create Product'),
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Center(
-                        child: Text('This is a Modal'),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  RaisedButton(
+                    child: Text('Consultar Producto'),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Center(
+                            child: Text('This is a Modal'),
+                          );
+                        },
                       );
                     },
-                  );
-                },
+                  ),
+                  RaisedButton(
+                    child: Text('Crear Producto'),
+                    color: Theme.of(context).accentColor,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      final Map<String, dynamic> product = {
+                        'title': _titleValue,
+                        'description': _descriptionValue,
+                        'price': _priceValue,
+                        'image': 'assets/food.jpg',
+                      };
+                      widget.createProductCallback(product);
+                      Navigator.pushReplacementNamed(context, '/manager');
+                    },
+                  )
+                ],
               ),
             ),
           ),
