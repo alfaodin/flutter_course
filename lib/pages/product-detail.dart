@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class ProductDetail extends StatelessWidget {
   final String title;
   final String imageUrl;
+  final String description;
 
-  const ProductDetail(this.title, this.imageUrl);
+  const ProductDetail(this.title, this.imageUrl, this.description);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,20 @@ class ProductDetail extends StatelessWidget {
               Image.asset(imageUrl),
               Container(
                 padding: const EdgeInsets.all(10),
-                child: Text(title),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Oswald',
+                      color: Colors.black),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  description,
+                ),
               ),
               RaisedButton(
                 color: Theme.of(context).accentColor,

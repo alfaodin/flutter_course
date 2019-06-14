@@ -24,23 +24,26 @@ class ProductManager extends StatelessWidget {
               automaticallyImplyLeading: false,
               title: Text('Choose an Item'),
             ),
-            ListView(
-              children: <Widget>[
-                Card(
-                  child: ListTile(
-                    title: Text('Manage Product'),
-                    onTap: () =>
-                        Navigator.pushReplacementNamed(context, '/admin'),
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  Card(
+                    child: ListTile(
+                      title: Text('Manage Product'),
+                      onTap: () =>
+                          Navigator.pushReplacementNamed(context, '/admin'),
+                    ),
                   ),
-                ),
-                Card(
-                  child: ListTile(
-                    title: Text('Music'),
-                    onTap: () =>
-                        Navigator.pushReplacementNamed(context, '/admin'),
+                  Card(
+                    color: Theme.of(context).primaryColor,
+                    child: ListTile(
+                      title: Text('Music'),
+                      onTap: () =>
+                          Navigator.pushReplacementNamed(context, '/admin'),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
