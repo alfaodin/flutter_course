@@ -41,7 +41,10 @@ class _MyAppState extends State<MyApp> {
       //debugShowMaterialGrid: true,
       title: 'test',
       theme: ThemeData(
+        brightness: Brightness.light,
         primarySwatch: Colors.deepOrange,
+        accentColor: Colors.deepPurple,
+        fontFamily: 'Oswald',
         cardColor: Color.fromARGB(140, 255, 0, 0),
       ),
       //home: Home(),
