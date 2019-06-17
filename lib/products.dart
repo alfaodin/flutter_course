@@ -26,12 +26,56 @@ class Products extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Image.asset(_products[index]['image']),
-          Text(
-            _products[index]['title'].toUpperCase(),
-            style: TextStyle(
-                color: Colors.yellow,
-                fontSize: 32,
-                fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  _products[index]['title'].toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.yellow,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10.0),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).accentColor,
+                    borderRadius: BorderRadius.circular(7.0)),
+                child: Text(
+                  '\$${_products[index]['price'].toString()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            ],
+          ),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Theme.of(context).accentColor,
+                width: 1.0,
+              ),
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 6,
+                vertical: 1.5,
+              ),
+              child: Text(
+                'La Gasca, Quito - Ecuador',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ),
           ButtonBar(
             alignment: MainAxisAlignment.center,

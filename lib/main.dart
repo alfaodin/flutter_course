@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/pages/auth.dart';
-import 'package:hello_world/pages/product-detail.dart';
+import 'package:flutter/rendering.dart';
 
+import 'package:hello_world/pages/auth.dart';
 import 'package:hello_world/product_manager.dart';
+import 'package:hello_world/pages/product-detail.dart';
 import 'package:hello_world/pages/products/product_admin.dart';
 
 import 'dart:math';
@@ -10,10 +11,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter/rendering.dart';
-
 main() {
-  //debugPaintSizeEnabled = true;
+  // debugPaintSizeEnabled = true;
   runApp(new MyApp());
 }
 

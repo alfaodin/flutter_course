@@ -21,6 +21,9 @@ class _ProductCreateState extends State<ProductCreate> {
       child: ListView(
         children: <Widget>[
           TextField(
+            decoration: InputDecoration(
+              labelText: 'Nombre del producto',
+            ),
             autofocus: true,
             textAlign: TextAlign.center,
             onChanged: (String value) {
@@ -41,6 +44,7 @@ class _ProductCreateState extends State<ProductCreate> {
                 child: Text('Descripcion:'),
               ),
               TextField(
+                maxLines: 4,
                 decoration: new InputDecoration(
                   labelText: 'Ingresa descipcion del producto',
                 ),
@@ -61,7 +65,6 @@ class _ProductCreateState extends State<ProductCreate> {
                 child: Text('Valor:'),
               ),
               TextField(
-                maxLines: 4,
                 decoration: new InputDecoration(
                   labelText: 'Ingresa el precio del producto',
                 ),

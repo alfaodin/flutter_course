@@ -20,62 +20,75 @@ class _AuthPageState extends State<AuthPage> {
         title: Text('Plase login'),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.5), BlendMode.dstATop),
+            image: AssetImage('assets/background.jpg'),
+          ),
+        ),
         padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: <Widget>[
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    onChanged: (String value) {
-                      setState(() {
-                        _email = value;
-                      });
-                    },
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextField(
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
-                  TextField(
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                    ),
-                    onChanged: (String value) {
-                      setState(() {
-                        _password = value;
-                      });
-                    },
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: (String value) {
+                    setState(() {
+                      _email = value;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  keyboardType: TextInputType.text,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
-                  SwitchListTile(
-                    value: _acceptTerms,
-                    title: Text('Accept terms'),
-                    onChanged: (bool val) {
-                      print('changed' + val.toString());
+                  onChanged: (String value) {
+                    setState(() {
+                      _password = value;
+                    });
+                  },
+                ),
+                SwitchListTile(
+                  value: _acceptTerms,
+                  title: Text('Accept terms'),
+                  onChanged: (bool val) {
+                    print('changed' + val.toString());
 
-                      setState(() {
-                        _acceptTerms = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  RaisedButton(
-                    child: Text('LOGIN'),
-                    onPressed: () {
-                      print('email $_email');
-                      Navigator.pushReplacementNamed(context, '/admin');
-                    },
-                  ),
-                ],
-              ),
+                    setState(() {
+                      _acceptTerms = val;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                RaisedButton(
+                  child: Text('LOGIN'),
+                  onPressed: () {
+                    print('email $_email');
+                    Navigator.pushReplacementNamed(context, '/admin');
+                  },
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
