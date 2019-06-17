@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hello_world/pages/music/songs.dart';
+import 'package:hello_world/pages/music/songs_controls.dart';
 import 'package:hello_world/theme/music_theme.dart';
 
 class MusicHome extends StatelessWidget {
@@ -33,7 +37,15 @@ class MusicHome extends StatelessWidget {
               child: Container(
                 width: 125,
                 height: 125,
-                child: Image.network(src),
+                child: RadiaSeekBar(
+                  child: ClipOval(
+                    clipper: CircleClipper(),
+                    child: Image.network(
+                      demoPlaylist.songs[0].albumArtUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -43,97 +55,52 @@ class MusicHome extends StatelessWidget {
             height: 125,
           ),
           //SONG INFO
-          Container(
-            color: accentColor,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 40,
-                bottom: 50,
-              ),
-              child: Column(
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      text: '',
-                      children: [
-                        // SONG TILTE
-                        TextSpan(
-                          text: 'Song Title \n',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 4,
-                            height: 1.5,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Artist Name',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(.75),
-                            fontSize: 12.0,
-                            letterSpacing: 3,
-                            height: 1.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  //Controls Play Pause Rewaind Forward
-                  Padding(
-                    padding: EdgeInsets.only(top: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Icons.skip_previous,
-                            color: Colors.white,
-                            size: 35,
-                          ),
-                          onPressed: () {
-                            // TODO:
-                          },
-                        ),
-                        RawMaterialButton(
-                          child: Padding(
-                            padding: EdgeInsets.all(8),
-                            child: Icon(
-                              Icons.play_arrow,
-                              color: darkAccentColor,
-                              size: 35,
-                            ),
-                          ),
-                          shape: CircleBorder(),
-                          fillColor: Colors.white,
-                          splashColor: lightAccentColor,
-                          highlightColor: lightAccentColor.withOpacity(.5),
-                          elevation: 10,
-                          highlightElevation: 5,
-                          onPressed: () {
-                            // TODO:
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.skip_next,
-                            color: Colors.white,
-                            size: 35,
-                          ),
-                          onPressed: () {
-                            // TODO:
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          new SongsControls(),
         ],
       ),
+    );
+  }
+}
+
+class CircleClipper extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) {
+    return Rect.fromCircle(
+      center: Offset(size.width / 2, size.height / 2),
+      radius: min(size.width, size.height) / 2,
+    );
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Rect> oldClipper) {
+    return true;
+  }
+}
+
+class RadialSeekBar extends StatefulWidget {
+  final double thumbSize;
+  final double thumbColor;
+  
+  final Color trackColor;
+  final double trackWidth;
+  
+  final Color progressColor;
+  final double progressWidth;
+  
+
+  RadialSeekBar({
+    this.trackWidth = 3.0,
+    this.trackColor = Colors.grey,
+  });
+
+  _RadialSeekBarState createState() => _RadialSeekBarState();
+}
+
+class _RadialSeekBarState extends State<RadialSeekBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: child,
     );
   }
 }
