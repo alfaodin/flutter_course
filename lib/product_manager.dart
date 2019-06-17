@@ -39,7 +39,7 @@ class ProductManager extends StatelessWidget {
                     child: ListTile(
                       title: Text('Music'),
                       onTap: () =>
-                          Navigator.pushReplacementNamed(context, '/admin'),
+                          Navigator.pushReplacementNamed(context, '/music'),
                     ),
                   ),
                 ],

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:hello_world/pages/auth.dart';
-import 'package:hello_world/product_manager.dart';
-import 'package:hello_world/pages/product-detail.dart';
-import 'package:hello_world/pages/products/product_admin.dart';
-
 import 'dart:math';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
+import 'package:hello_world/pages/auth.dart';
+import 'package:hello_world/product_manager.dart';
+import 'package:hello_world/pages/product-detail.dart';
+import 'package:hello_world/pages/music/music_home.dart';
+import 'package:hello_world/pages/products/product_admin.dart';
 
 main() {
   // debugPaintSizeEnabled = true;
@@ -38,6 +39,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       //debugShowMaterialGrid: true,
+      debugShowCheckedModeBanner: false,
       title: 'test',
       theme: ThemeData(
         brightness: Brightness.light,
@@ -54,6 +56,7 @@ class _MyAppState extends State<MyApp> {
         '/admin': (BuildContext context) => ProductAdmin(
               createProductCallback: _addProduct,
             ),
+        '/music': (BuildContext context) => MusicHome(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
