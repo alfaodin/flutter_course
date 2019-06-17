@@ -78,19 +78,22 @@ class CircleClipper extends CustomClipper<Rect> {
 }
 
 class RadialSeekBar extends StatefulWidget {
+  final Color thumbColor;
   final double thumbSize;
-  final double thumbColor;
-  
+
   final Color trackColor;
   final double trackWidth;
-  
+
   final Color progressColor;
   final double progressWidth;
-  
 
   RadialSeekBar({
     this.trackWidth = 3.0,
     this.trackColor = Colors.grey,
+    this.progressWidth = 5.0,
+    this.progressColor = Colors.black,
+    this.thumbSize = 10.0,
+    this.thumbColor = Colors.black,
   });
 
   _RadialSeekBarState createState() => _RadialSeekBarState();
