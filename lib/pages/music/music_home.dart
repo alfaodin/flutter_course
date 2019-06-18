@@ -87,6 +87,11 @@ class RadialSeekBar extends StatefulWidget {
   final Color progressColor;
   final double progressWidth;
 
+  final double thumbPosition;
+  final double progressPercentage;
+
+  final Widget child;
+
   RadialSeekBar({
     this.trackWidth = 3.0,
     this.trackColor = Colors.grey,
@@ -94,6 +99,9 @@ class RadialSeekBar extends StatefulWidget {
     this.progressColor = Colors.black,
     this.thumbSize = 10.0,
     this.thumbColor = Colors.black,
+    this.progressPercentage = 0,
+    this.thumbPosition = 0,
+    this.child,
   });
 
   _RadialSeekBarState createState() => _RadialSeekBarState();
@@ -102,8 +110,45 @@ class RadialSeekBar extends StatefulWidget {
 class _RadialSeekBarState extends State<RadialSeekBar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: child,
+    return CustomPaint(
+      painter: RadialSeekBarPainter(),
+      child: widget.child,
     );
+  }
+}
+
+class RadialSeekBarPainter extends CustomPainter {
+  final Color thumbColor;
+  final double thumbSize;
+
+  final Color trackColor;
+  final double trackWidth;
+
+  final Color progressColor;
+  final double progressWidth;
+
+  final double thumbPosition;
+  final double progressPercentage;
+
+  RadialSeekBarPainter({
+    this.trackWidth = 3.0,
+    this.trackColor = Colors.grey,
+    this.progressWidth = 5.0,
+    this.progressColor = Colors.black,
+    this.thumbSize = 10.0,
+    this.thumbColor = Colors.black,
+    this.progressPercentage = 0,
+    this.thumbPosition = 0,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // TODO: implement paint
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    // TODO: implement shouldRepaint
+    return null;
   }
 }
