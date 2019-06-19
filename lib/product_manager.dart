@@ -29,6 +29,7 @@ class ProductManager extends StatelessWidget {
                 children: <Widget>[
                   Card(
                     child: ListTile(
+                      leading: Icon(Icons.assessment),
                       title: Text('Manage Product'),
                       onTap: () =>
                           Navigator.pushReplacementNamed(context, '/admin'),
@@ -50,6 +51,16 @@ class ProductManager extends StatelessWidget {
       ),
       appBar: AppBar(
         title: Text('Products'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.favorite,
+            ),
+            onPressed: () {
+              print('NAvegar a favoritos');
+            },
+          )
+        ],
       ),
       body: Column(
         children: <Widget>[

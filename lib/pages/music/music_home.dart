@@ -37,7 +37,7 @@ class MusicHome extends StatelessWidget {
               child: Container(
                 width: 125,
                 height: 125,
-                child: RadiaSeekBar(
+                child: RadialSeekBar(
                   child: ClipOval(
                     clipper: CircleClipper(),
                     child: Image.network(
