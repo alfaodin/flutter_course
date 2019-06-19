@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 
 class ProductDetail extends StatelessWidget {
   final String title;
+  final double price;
   final String imageUrl;
   final String description;
 
-  const ProductDetail(this.title, this.imageUrl, this.description);
+  const ProductDetail(this.title, this.imageUrl, this.price, this.description);
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +22,42 @@ class ProductDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              Image.asset(imageUrl),
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(imageUrl),
+                ),
+              ),
               Container(
                 padding: const EdgeInsets.all(10),
-                child: Text(
-                  title,
-                  style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Oswald',
-                      color: Colors.black),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      title,
+                      style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Oswald',
+                          color: Colors.black),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(
+                        '\$' + price.toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
               Container(

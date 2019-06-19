@@ -80,8 +80,9 @@ class Products extends StatelessWidget {
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
-              RaisedButton(
-                child: Text('Details'),
+              IconButton(
+                icon: Icon(Icons.info),
+                color: Theme.of(context).accentColor,
                 onPressed: () {
                   print('/product/$index');
                   Navigator.pushNamed<bool>(context, '/product/$index')
@@ -92,7 +93,21 @@ class Products extends StatelessWidget {
                     }
                   });
                 },
-              )
+              ),
+              IconButton(
+                icon: Icon(Icons.favorite_border),
+                color: Theme.of(context).accentColor,
+                onPressed: () {
+                  print('/product/$index');
+                  Navigator.pushNamed<bool>(context, '/product/$index')
+                      .then((bool value) {
+                    print("a ver que mismo $value");
+                    if (value) {
+                      deleteProductFunc(index);
+                    }
+                  });
+                },
+              ),
             ],
           )
         ],
