@@ -88,7 +88,7 @@ class RadialSeekBar extends StatefulWidget {
   final double progressWidth;
 
   final double thumbPosition;
-  final double progressPercentage;
+  final double progressPercent;
 
   final Widget child;
 
@@ -99,7 +99,7 @@ class RadialSeekBar extends StatefulWidget {
     this.progressColor = Colors.black,
     this.thumbSize = 10.0,
     this.thumbColor = Colors.black,
-    this.progressPercentage = 0,
+    this.progressPercent = 0,
     this.thumbPosition = 0,
     this.child,
   });
@@ -111,7 +111,16 @@ class _RadialSeekBarState extends State<RadialSeekBar> {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: RadialSeekBarPainter(),
+      painter: RadialSeekBarPainter(
+        trackWidth: widget.trackWidth,
+        trackColor: widget.trackColor,
+        progressWidth: widget.progressWidth,
+        progressColor: widget.progressColor,
+        progressPercent: widget.progressPercent,
+        thumbSize: widget.thumbSize,
+        thumbColor: widget.thumbColor,
+        thumbPosition: widget.thumbPosition,
+      ),
       child: widget.child,
     );
   }
@@ -121,25 +130,39 @@ class RadialSeekBarPainter extends CustomPainter {
   final Color thumbColor;
   final double thumbSize;
 
+  Paint trackPaint;
   final Color trackColor;
   final double trackWidth;
 
+  Paint progressPaint;
   final Color progressColor;
   final double progressWidth;
 
+  Paint thumbPaint;
   final double thumbPosition;
-  final double progressPercentage;
+  final double progressPercent;
 
   RadialSeekBarPainter({
-    this.trackWidth = 3.0,
-    this.trackColor = Colors.grey,
-    this.progressWidth = 5.0,
-    this.progressColor = Colors.black,
-    this.thumbSize = 10.0,
-    this.thumbColor = Colors.black,
-    this.progressPercentage = 0,
-    this.thumbPosition = 0,
-  });
+    @required this.trackWidth,
+    @required this.trackColor,
+    @required this.progressWidth,
+    @required this.progressColor,
+    @required this.thumbSize,
+    @required this.thumbColor,
+    @required this.progressPercent,
+    @required this.thumbPosition,
+  })  : trackPaint = new Paint()
+          ..color = trackColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = trackWidth,
+        progressPaint = new Paint()
+          ..color = progressColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = progressWidth
+          ..strokeCap = StrokeCap.round,
+        thumbPaint = new Paint()
+          ..color = thumbColor
+          ..style = PaintingStyle.fill;
 
   @override
   void paint(Canvas canvas, Size size) {
