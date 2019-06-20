@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './products.dart';
 import './product_control.dart';
+import 'package:hello_world/pages/products/widgets/products/products.dart';
 
 class ProductManager extends StatelessWidget {
   final List<Map<String, dynamic>> products;
@@ -43,6 +43,11 @@ class ProductManager extends StatelessWidget {
                           Navigator.pushReplacementNamed(context, '/music'),
                     ),
                   ),
+                  ListTile(
+                    title: Text('Splash Page'),
+                    onTap: () =>
+                        Navigator.pushReplacementNamed(context, '/splash'),
+                  )
                 ],
               ),
             ),

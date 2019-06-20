@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:hello_world/pages/home.dart';
 
 import 'dart:math';
 import 'dart:async';
@@ -57,6 +58,7 @@ class _MyAppState extends State<MyApp> {
               createProductCallback: _addProduct,
             ),
         '/music': (BuildContext context) => MusicHome(),
+        '/splash': (BuildContext context) => Home(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
