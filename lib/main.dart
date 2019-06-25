@@ -46,8 +46,13 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         primarySwatch: Colors.deepOrange,
         accentColor: Colors.deepPurple,
+        primaryColor: Colors.green,
         fontFamily: 'Oswald',
         cardColor: Color.fromARGB(140, 255, 0, 0),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.yellow,
+          textTheme: ButtonTextTheme.primary,
+        ),
       ),
       //home: Home(),
       routes: {

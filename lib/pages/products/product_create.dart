@@ -16,15 +16,19 @@ class _ProductCreateState extends State<ProductCreate> {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double targetWidth = deviceWidth > 550 ? 500 : deviceWidth * .95;
+    final double targetPadding = deviceWidth - targetWidth;
+
     return Container(
-      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(10),
       child: ListView(
+        padding: EdgeInsets.symmetric(horizontal: targetPadding / 2),
         children: <Widget>[
           TextField(
             decoration: InputDecoration(
               labelText: 'Nombre del producto',
             ),
-            autofocus: true,
             textAlign: TextAlign.center,
             onChanged: (String value) {
               setState(() {
@@ -100,8 +104,7 @@ class _ProductCreateState extends State<ProductCreate> {
                   ),
                   RaisedButton(
                     child: Text('Crear Producto'),
-                    color: Theme.of(context).accentColor,
-                    textColor: Colors.white,
+                    textColor: Colors.pink,
                     onPressed: () {
                       final Map<String, dynamic> product = {
                         'title': _titleValue,

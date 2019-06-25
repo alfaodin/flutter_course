@@ -15,6 +15,9 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
+    final targetWidth = MediaQuery.of(context).size.width > 768
+        ? 500
+        : MediaQuery.of(context).size.width * .95;
     return Scaffold(
       appBar: AppBar(
         title: Text('Plase login'),
@@ -31,62 +34,66 @@ class _AuthPageState extends State<AuthPage> {
         padding: const EdgeInsets.all(10),
         child: Center(
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextField(
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    filled: true,
-                    fillColor: Colors.white,
+            child: Container(
+              width: targetWidth,
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextField(
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: (String value) {
+                      setState(() {
+                        _email = value;
+                      });
+                    },
                   ),
-                  keyboardType: TextInputType.emailAddress,
-                  onChanged: (String value) {
-                    setState(() {
-                      _email = value;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    filled: true,
-                    fillColor: Colors.white,
+                  SizedBox(
+                    height: 10,
                   ),
-                  onChanged: (String value) {
-                    setState(() {
-                      _password = value;
-                    });
-                  },
-                ),
-                SwitchListTile(
-                  value: _acceptTerms,
-                  title: Text('Accept terms'),
-                  onChanged: (bool val) {
-                    print('changed' + val.toString());
+                  TextField(
+                    keyboardType: TextInputType.text,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                    onChanged: (String value) {
+                      setState(() {
+                        _password = value;
+                      });
+                    },
+                  ),
+                  SwitchListTile(
+                    value: _acceptTerms,
+                    title: Text('Accept terms'),
+                    onChanged: (bool val) {
+                      print('changed' + val.toString());
 
-                    setState(() {
-                      _acceptTerms = val;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                RaisedButton(
-                  child: Text('LOGIN'),
-                  onPressed: () {
-                    print('email $_email');
-                    Navigator.pushReplacementNamed(context, '/admin');
-                  },
-                ),
-              ],
+                      setState(() {
+                        _acceptTerms = val;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  RaisedButton(
+                    child: Text('LOGIN'),
+                    onPressed: () {
+                      print('email $_email');
+                      Navigator.pushReplacementNamed(context, '/admin');
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
