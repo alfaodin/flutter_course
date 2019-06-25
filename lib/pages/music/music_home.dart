@@ -38,6 +38,8 @@ class MusicHome extends StatelessWidget {
                 width: 125,
                 height: 125,
                 child: RadialSeekBar(
+                  progressPercent: .5,
+                  thumbPosition: .5,
                   child: ClipOval(
                     clipper: CircleClipper(),
                     child: Image.network(
@@ -111,7 +113,7 @@ class _RadialSeekBarState extends State<RadialSeekBar> {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: RadialSeekBarPainter(
+      foregroundPainter: RadialSeekBarPainter(
         trackWidth: widget.trackWidth,
         trackColor: widget.trackColor,
         progressWidth: widget.progressWidth,
@@ -166,12 +168,34 @@ class RadialSeekBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
+    print(size);
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = min(size.width, size.height) / 2;
+
+    // Paint the track
+    canvas.drawCircle(center, radius, trackPaint);
+
+    final Rect rect = Rect.fromCircle(
+      center: center,
+      radius: radius,
+    );
+
+    final progressAngle = 2 * pi * progressPercent;
+    // Paint progress
+    canvas.drawArc(rect, -pi / 2, progressAngle, false, progressPaint);
+
+    // Paint Thumnb
+    final thumbAngle = 2 * pi * thumbPosition - (pi / 2);
+    final thumbX = cos(thumbAngle) * radius;
+    final thumbY = sin(thumbAngle) * radius;
+    final thumbCenter = Offset(thumbX, thumbY) + center;
+    final thumbRadius = thumbSize / 2;
+    canvas.drawCircle(thumbCenter, thumbRadius, thumbPaint);
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     // TODO: implement shouldRepaint
-    return null;
+    return false;
   }
 }
