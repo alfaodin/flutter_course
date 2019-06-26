@@ -3,11 +3,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hello_world/pages/music/songs.dart';
-import 'package:hello_world/pages/music/songs_controls.dart';
 import 'package:hello_world/theme/music_theme.dart';
+import 'package:hello_world/pages/music/songs_controls.dart';
+
+import 'package:fluttery/animations.dart';
+import 'package:fluttery/gestures.dart';
 
 class MusicHome extends StatelessWidget {
-  const MusicHome({Key key}) : super(key: key);
+
+  double _seekPercent = .15;
+  double _startDragPercent;
+  PolarCoord _startDragCoord;
 
   @override
   Widget build(BuildContext context) {
@@ -33,21 +39,33 @@ class MusicHome extends StatelessWidget {
         children: <Widget>[
           // SEEK BAR
           Expanded(
-            child: Center(
+            child: RadialDragGestureDetector(
+              onRadialDragStart: _onDragStart,
+              onRadialDragUpdate: _onDragUpdate,
+              onRadialDragEnd: _onDragEnd,
               child: Container(
-                width: 140,
-                height: 140,
-                color: Colors.green,
-                child: RadialSeekBar(
-                  progressPercent: .5,
-                  thumbPosition: .5,
-                  innerPadding: const EdgeInsets.all(10),
-                  outerPadding: const EdgeInsets.all(10),
-                  child: ClipOval(
-                    clipper: CircleClipper(),
-                    child: Image.network(
-                      demoPlaylist.songs[0].albumArtUrl,
-                      fit: BoxFit.cover,
+                color: Colors.indigo,
+                width: double.infinity,
+                height: double.infinity,
+                child: Center(
+                  child: Container(
+                    width: 140,
+                    height: 140,
+                    child: RadialProgressBar(
+                      trackColor: const Color(0xFFDDDDDD),
+                      progressPercent: _seekPercent,
+                      progressColor: accentColor,
+                      thumbPosition: _seekPercent,
+                      thumbColor: lightAccentColor,
+                      innerPadding: const EdgeInsets.all(10),
+                      outerPadding: const EdgeInsets.all(10),
+                      child: ClipOval(
+                        clipper: CircleClipper(),
+                        child: Image.network(
+                          demoPlaylist.songs[0].albumArtUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -65,6 +83,10 @@ class MusicHome extends StatelessWidget {
       ),
     );
   }
+
+  void _onDragStart(PolarCoord coord) {}
+  void _onDragUpdate(PolarCoord coord) {}
+  void _onDragEnd() {}
 }
 
 class CircleClipper extends CustomClipper<Rect> {
@@ -82,7 +104,7 @@ class CircleClipper extends CustomClipper<Rect> {
   }
 }
 
-class RadialSeekBar extends StatefulWidget {
+class RadialProgressBar extends StatefulWidget {
   final Color thumbColor;
   final double thumbSize;
 
@@ -100,7 +122,7 @@ class RadialSeekBar extends StatefulWidget {
 
   final Widget child;
 
-  RadialSeekBar({
+  RadialProgressBar({
     this.trackWidth = 3.0,
     this.trackColor = Colors.grey,
     this.progressWidth = 5.0,
@@ -114,10 +136,10 @@ class RadialSeekBar extends StatefulWidget {
     this.child,
   });
 
-  _RadialSeekBarState createState() => _RadialSeekBarState();
+  _RadialProgressBarState createState() => _RadialProgressBarState();
 }
 
-class _RadialSeekBarState extends State<RadialSeekBar> {
+class _RadialProgressBarState extends State<RadialProgressBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
