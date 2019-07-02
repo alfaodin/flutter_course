@@ -27,7 +27,7 @@ class _PageViewIndicatorState extends State<PageViewIndicator> {
       ),
       child: Container(
         width: 100,
-        height: 28,
+        height: 20,
         color: Colors.green,
       ),
     );
@@ -40,7 +40,7 @@ class IndicatorPainter extends CustomPainter {
   final int currentIndicator;
 
   Paint dotPaint;
-  static const double _SMALLDOT = 10;
+  static const double _SMALLDOT = 5;
   static const double _BIGDOT = 8;
 
   IndicatorPainter(this.length, this.currentIndicator,
@@ -52,6 +52,7 @@ class IndicatorPainter extends CustomPainter {
     final double spaceBetween = size.width / (length + 1);
 
     dotPaint.color = Colors.blue.withOpacity(0.5);
+    dotPaint.strokeWidth = 0;
     canvas.drawRect(Rect.fromLTRB(0, 0, size.width, size.height), dotPaint);
 
     // _drawCircle(canvas, 0, Offset(spaceBetween, size.height / 2));
@@ -61,7 +62,7 @@ class IndicatorPainter extends CustomPainter {
 
     dotPaint.color = Colors.deepOrange;
     canvas.drawRRect(
-        RRect.fromLTRBR(0, 6, 50, 22, Radius.circular(0)), dotPaint);
+        RRect.fromLTRBR(10, 5, 50, 15, Radius.circular(3)), dotPaint);
   }
 
   @override
