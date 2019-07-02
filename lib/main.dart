@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      //debugShowMaterialGrid: true,
+      debugShowMaterialGrid: true,
       debugShowCheckedModeBanner: false,
       title: 'test',
       theme: ThemeData(
