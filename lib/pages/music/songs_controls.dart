@@ -99,6 +99,7 @@ class PlayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AudioComponent(
+      updateMe: [WatchableAudioProperties.audioPlayerState],
       playerBuilder: (BuildContext context, AudioPlayer player, Widget child) {
         Function onPressed;
         Color buttonColor = lightAccentColor;
