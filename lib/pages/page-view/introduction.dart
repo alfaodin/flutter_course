@@ -29,6 +29,7 @@ class IntroducctionPage extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 60,
+          color: Colors.greenAccent,
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Row(
@@ -71,7 +72,7 @@ class IntroducctionPage extends StatelessWidget {
         Align(
           alignment: Alignment.bottomLeft,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 80.0, left: 50.0),
+            padding: const EdgeInsets.only(bottom: 64.0, left: 40.0),
             child: PageViewIndicator(
               controller: pageController,
               itemCout: onboardData.length,
