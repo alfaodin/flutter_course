@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttery_audio/fluttery_audio.dart';
 import 'package:hello_world/pages/music/songs.dart';
 import 'package:hello_world/theme/music_theme.dart';
 import 'package:hello_world/pages/music/songs_controls.dart';
@@ -17,38 +18,43 @@ class MusicHome extends StatefulWidget {
 class _MusicHomeState extends State<MusicHome> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        title: Text(''),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {},
-          color: const Color(0xFFDDDDDD),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.menu),
+    return Audio(
+      
+      audioUrl: demoPlaylist.songs[0].audioUrl,
+      playbackState: PlaybackState.paused,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          title: Text(''),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
             onPressed: () {},
             color: const Color(0xFFDDDDDD),
           ),
-        ],
-      ),
-      body: Column(
-        children: <Widget>[
-          // SEEK BAR
-          Expanded(
-            child: new RadialSeekBar(),
-          ),
-          // VISUALIZER
-          Container(
-            width: double.infinity,
-            height: 125,
-          ),
-          //SONG INFO
-          new SongsControls(),
-        ],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {},
+              color: const Color(0xFFDDDDDD),
+            ),
+          ],
+        ),
+        body: Column(
+          children: <Widget>[
+            // SEEK BAR
+            Expanded(
+              child: new RadialSeekBar(),
+            ),
+            // VISUALIZER
+            Container(
+              width: double.infinity,
+              height: 125,
+            ),
+            //SONG INFO
+            new SongsControls(),
+          ],
+        ),
       ),
     );
   }
