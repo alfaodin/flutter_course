@@ -43,6 +43,14 @@ class ProductManager extends StatelessWidget {
                           Navigator.pushReplacementNamed(context, '/music'),
                     ),
                   ),
+                  Card(
+                    color: Theme.of(context).primaryColor,
+                    child: ListTile(
+                      title: Text('Staggered Animation'),
+                      onTap: () =>
+                          Navigator.pushReplacementNamed(context, '/stagger'),
+                    ),
+                  ),
                   ListTile(
                     title: Text('Splash Page'),
                     onTap: () =>

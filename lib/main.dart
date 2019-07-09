@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hello_world/pages/home.dart';
+import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
 
 import 'dart:math';
 import 'dart:async';
@@ -64,6 +65,7 @@ class _MyAppState extends State<MyApp> {
             ),
         '/music': (BuildContext context) => MusicHome(),
         '/splash': (BuildContext context) => Home(),
+        '/stagger': (BuildContext context) => StaggerPageAnimator(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
@@ -74,11 +76,11 @@ class _MyAppState extends State<MyApp> {
           final int index = int.parse(pathElements[2]);
           return MaterialPageRoute<bool>(
             builder: (BuildContext context) => ProductDetail(
-                  _products[index]['title'],
-                  _products[index]['image'],
-                  _products[index]['price'],
-                  _products[index]['description'],
-                ),
+              _products[index]['title'],
+              _products[index]['image'],
+              _products[index]['price'],
+              _products[index]['description'],
+            ),
           );
         }
         return null;
@@ -127,8 +129,8 @@ class _TextControllerState extends State<TextController> {
                 color: Theme.of(context).primaryColorLight,
                 child: Text('Cambia texto'),
                 onPressed: () => {
-                      setState(() => {changeText = getNewString()}),
-                    },
+                  setState(() => {changeText = getNewString()}),
+                },
               )),
         ],
       ),
