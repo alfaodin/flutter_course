@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttery_audio/fluttery_audio.dart';
 import 'package:hello_world/pages/music/songs.dart';
 import 'package:hello_world/theme/music_theme.dart';
 import 'package:hello_world/pages/music/songs_controls.dart';
@@ -9,84 +10,146 @@ import 'package:hello_world/pages/music/songs_controls.dart';
 import 'package:fluttery/animations.dart';
 import 'package:fluttery/gestures.dart';
 
-class MusicHome extends StatelessWidget {
+class MusicHome extends StatefulWidget {
+  @override
+  _MusicHomeState createState() => _MusicHomeState();
+}
 
-  double _seekPercent = .15;
-  double _startDragPercent;
-  PolarCoord _startDragCoord;
-
+class _MusicHomeState extends State<MusicHome> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        title: Text(''),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {},
-          color: const Color(0xFFDDDDDD),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.menu),
+    return Audio(
+      
+      audioUrl: demoPlaylist.songs[0].audioUrl,
+      playbackState: PlaybackState.paused,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          title: Text(''),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
             onPressed: () {},
             color: const Color(0xFFDDDDDD),
           ),
-        ],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {},
+              color: const Color(0xFFDDDDDD),
+            ),
+          ],
+        ),
+        body: Column(
+          children: <Widget>[
+            // SEEK BAR
+            Expanded(
+              child: new RadialSeekBar(),
+            ),
+            // VISUALIZER
+            Container(
+              width: double.infinity,
+              height: 125,
+            ),
+            //SONG INFO
+            new SongsControls(),
+          ],
+        ),
       ),
-      body: Column(
-        children: <Widget>[
-          // SEEK BAR
-          Expanded(
-            child: RadialDragGestureDetector(
-              onRadialDragStart: _onDragStart,
-              onRadialDragUpdate: _onDragUpdate,
-              onRadialDragEnd: _onDragEnd,
-              child: Container(
-                color: Colors.indigo,
-                width: double.infinity,
-                height: double.infinity,
-                child: Center(
-                  child: Container(
-                    width: 140,
-                    height: 140,
-                    child: RadialProgressBar(
-                      trackColor: const Color(0xFFDDDDDD),
-                      progressPercent: _seekPercent,
-                      progressColor: accentColor,
-                      thumbPosition: _seekPercent,
-                      thumbColor: lightAccentColor,
-                      innerPadding: const EdgeInsets.all(10),
-                      outerPadding: const EdgeInsets.all(10),
-                      child: ClipOval(
-                        clipper: CircleClipper(),
-                        child: Image.network(
-                          demoPlaylist.songs[0].albumArtUrl,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
+    );
+  }
+}
+
+class RadialSeekBar extends StatefulWidget {
+  final double seekPercent;
+
+  RadialSeekBar({
+    this.seekPercent = 0.0,
+  });
+
+  @override
+  _RadialSeekBarState createState() => _RadialSeekBarState();
+}
+
+class _RadialSeekBarState extends State<RadialSeekBar> {
+  double _seekPercent = 0;
+  double _startDragPercent;
+  double _currentDragPercent;
+  PolarCoord _startDragCoord;
+
+  void _onDragStart(PolarCoord coord) {
+    _startDragCoord = coord;
+    _startDragPercent = _seekPercent;
+  }
+
+  void _onDragUpdate(PolarCoord coord) {
+    final double dragAngle = coord.angle - _startDragCoord.angle;
+    final dragPercent = dragAngle / (2 * pi);
+    setState(() => _currentDragPercent = (_startDragPercent - dragPercent) % 1);
+  }
+
+  void _onDragEnd() {
+    setState(() {
+      _seekPercent = _currentDragPercent;
+      _currentDragPercent = null;
+      _startDragCoord = null;
+      _startDragPercent = 0.0;
+    });
+  }
+
+  _RadialSeekBarState({
+    @required double currentDragPercent,
+    @required double seekPercent,
+  })  : _currentDragPercent = currentDragPercent,
+        _seekPercent = seekPercent;
+
+  @override
+  void initState() {
+    super.initState();
+    _seekPercent = widget.seekPercent;
+  }
+
+  @override
+  void didUpdateWidget(RadialSeekBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _seekPercent = widget.seekPercent;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RadialDragGestureDetector(
+      onRadialDragStart: _onDragStart,
+      onRadialDragUpdate: _onDragUpdate,
+      onRadialDragEnd: _onDragEnd,
+      child: Container(
+        color: Colors.indigo,
+        width: double.infinity,
+        height: double.infinity,
+        child: Center(
+          child: Container(
+            width: 140,
+            height: 140,
+            child: RadialProgressBar(
+              trackColor: const Color(0xFFDDDDDD),
+              progressPercent: _currentDragPercent ?? _seekPercent,
+              progressColor: accentColor,
+              thumbPosition: _currentDragPercent ?? _seekPercent,
+              thumbColor: lightAccentColor,
+              innerPadding: const EdgeInsets.all(10),
+              outerPadding: const EdgeInsets.all(10),
+              child: ClipOval(
+                clipper: CircleClipper(),
+                child: Image.network(
+                  demoPlaylist.songs[0].albumArtUrl,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          // VISUALIZER
-          Container(
-            width: double.infinity,
-            height: 125,
-          ),
-          //SONG INFO
-          new SongsControls(),
-        ],
+        ),
       ),
     );
   }
-
-  void _onDragStart(PolarCoord coord) {}
-  void _onDragUpdate(PolarCoord coord) {}
-  void _onDragEnd() {}
 }
 
 class CircleClipper extends CustomClipper<Rect> {
