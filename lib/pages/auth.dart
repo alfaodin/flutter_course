@@ -9,8 +9,13 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  String _email;
-  String _password;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final Map<String, dynamic> _formData = {
+    'email': null,
+    'password': null,
+    'acceptTerms': false,
+  };
+
   bool _acceptTerms = false;
 
   @override
@@ -37,67 +42,93 @@ class _AuthPageState extends State<AuthPage> {
             child: Container(
               width: targetWidth,
               alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      filled: true,
-                      fillColor: Colors.white,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    buildEmailInputTextField(),
+                    SizedBox(
+                      height: 10,
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    onChanged: (String value) {
-                      setState(() {
-                        _email = value;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      filled: true,
-                      fillColor: Colors.white,
+                    buildPasswordInputTextField(),
+                    SizedBox(
+                      height: 10,
                     ),
-                    onChanged: (String value) {
-                      setState(() {
-                        _password = value;
-                      });
-                    },
-                  ),
-                  SwitchListTile(
-                    value: _acceptTerms,
-                    title: Text('Accept terms'),
-                    onChanged: (bool val) {
-                      print('changed' + val.toString());
-
-                      setState(() {
-                        _acceptTerms = val;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  RaisedButton(
-                    child: Text('LOGIN'),
-                    onPressed: () {
-                      print('email $_email');
-                      Navigator.pushReplacementNamed(context, '/admin');
-                    },
-                  ),
-                ],
+                    buildAcceptTermsSwitchListTile(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    RaisedButton(
+                      child: Text('LOGIN'),
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+                          print('email: ' + _formData['email']);
+                          Navigator.pushReplacementNamed(context, '/admin');
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  SwitchListTile buildAcceptTermsSwitchListTile() {
+    return SwitchListTile(
+      value: _acceptTerms,
+      title: Text('Accept terms'),
+      onChanged: (bool val) {
+        print('changed' + val.toString());
+        _formData['acceptTerms'] = val;
+      },
+    );
+  }
+
+  TextFormField buildPasswordInputTextField() {
+    return TextFormField(
+      validator: (String value) {
+        if (value.isEmpty || value.length < 5) {
+          return 'Password must be at leats 5 characters.';
+        }
+      },
+      keyboardType: TextInputType.text,
+      obscureText: true,
+      decoration: InputDecoration(
+        labelText: 'Password',
+        filled: true,
+        fillColor: Colors.white,
+      ),
+      onSaved: (String value) {
+        _formData['password'] = value;
+      },
+    );
+  }
+
+  TextFormField buildEmailInputTextField() {
+    return TextFormField(
+      validator: (String value) {
+        if (value.isEmpty ||
+            !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                .hasMatch(value)) {
+          return 'Description is Required an should be 10+ characters long.';
+        }
+      },
+      textAlign: TextAlign.center,
+      decoration: InputDecoration(
+        labelText: 'Email',
+        filled: true,
+        fillColor: Colors.white,
+      ),
+      keyboardType: TextInputType.emailAddress,
+      onSaved: (String value) {
+        _formData['email'] = value;
+      },
     );
   }
 }
