@@ -12,10 +12,10 @@ class _StaggerPageAnimatorState extends State<StaggerPageAnimator>
   AnimationController _animController;
 
   @override
-  void iniState() {
+  void initState() {
     super.initState();
     _animController = AnimationController(
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       vsync: this,
     );
     _animController.forward();
