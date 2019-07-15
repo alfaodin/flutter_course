@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'home_page_enter_animation.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final HomePageEnterAnimation animation;
 
   HomePage({
@@ -11,15 +11,29 @@ class HomePage extends StatelessWidget {
   }) : animation = HomePageEnterAnimation(controller);
 
   @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Container(
       child: Scaffold(
         body: AnimatedBuilder(
-          animation: animation.controller,
+          animation: widget.animation.controller,
           builder: (context, child) => _buildAnimation(context, child, size),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            widget.animation.controller.reset();
+            widget.animation.controller.forward();
+          },
+          tooltip: 'Increment Counter',
+          child: Icon(Icons.add),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }
@@ -32,10 +46,10 @@ class HomePage extends StatelessWidget {
           child: Stack(
             overflow: Overflow.visible,
             children: <Widget>[
-              topBar(animation.barheight.value),
+              topBar(widget.animation.barHeight.value),
               circle(
                 size,
-                animation.avatarSize.value,
+                widget.animation.avatarSize.value,
               ),
             ],
           ),
@@ -48,19 +62,14 @@ class HomePage extends StatelessWidget {
                 height: 60,
               ),
               Opacity(
-                opacity: animation.titleOpacity.value,
-                child: Placeholder(
-                  fallbackWidth: 28,
-                  fallbackHeight: 50,
-                  color: const Color(0xFF455A64), // Blue Grey 700
-                  strokeWidth: 5,
-                ),
+                opacity: widget.animation.titleOpacity.value,
+                child: placeholderBox(60, 100, Alignment.centerLeft),
               ),
               SizedBox(
                 height: 8,
               ),
               Opacity(
-                  opacity: animation.textOpacity.value,
+                  opacity: widget.animation.textOpacity.value,
                   child: placeholderBox(200, 100, Alignment.centerRight))
             ],
           ),
