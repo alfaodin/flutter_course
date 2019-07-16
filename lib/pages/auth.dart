@@ -16,8 +16,6 @@ class _AuthPageState extends State<AuthPage> {
     'acceptTerms': false,
   };
 
-  bool _acceptTerms = false;
-
   @override
   Widget build(BuildContext context) {
     final targetWidth = MediaQuery.of(context).size.width > 768
@@ -62,7 +60,8 @@ class _AuthPageState extends State<AuthPage> {
                     RaisedButton(
                       child: Text('LOGIN'),
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {
+                        if (_formKey.currentState.validate() &&
+                            _formData['acceptTerms'] == true) {
                           _formKey.currentState.save();
                           print('email: ' + _formData['email']);
                           Navigator.pushReplacementNamed(context, '/admin');
@@ -81,11 +80,13 @@ class _AuthPageState extends State<AuthPage> {
 
   SwitchListTile buildAcceptTermsSwitchListTile() {
     return SwitchListTile(
-      value: _acceptTerms,
+      value: _formData['acceptTerms'],
       title: Text('Accept terms'),
       onChanged: (bool val) {
         print('changed' + val.toString());
-        _formData['acceptTerms'] = val;
+        setState(() {
+          _formData['acceptTerms'] = val;
+        });
       },
     );
   }

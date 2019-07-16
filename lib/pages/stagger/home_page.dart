@@ -49,19 +49,15 @@ class HomePage extends StatelessWidget {
               ),
               Opacity(
                 opacity: animation.titleOpacity.value,
-                child: Placeholder(
-                  fallbackWidth: 28,
-                  fallbackHeight: 50,
-                  color: const Color(0xFF455A64), // Blue Grey 700
-                  strokeWidth: 5,
-                ),
+                child: placeholderBox(50, 200, Alignment.centerLeft),
               ),
               SizedBox(
                 height: 8,
               ),
               Opacity(
-                  opacity: animation.textOpacity.value,
-                  child: placeholderBox(200, 100, Alignment.centerRight))
+                opacity: animation.textOpacity.value,
+                child: placeholderBox(200, 100, Alignment.centerRight),
+              ),
             ],
           ),
         )
