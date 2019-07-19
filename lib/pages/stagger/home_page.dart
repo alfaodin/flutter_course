@@ -73,6 +73,17 @@ class _HomePageState extends State<HomePage> {
                   child: placeholderBox(200, 100, Alignment.centerRight))
             ],
           ),
+        ),
+        Stack(
+          children: <Widget>[
+            Positioned(
+              child: Container(
+                width: 100,
+                height: 30,
+                color: Colors.blueAccent,
+              ),
+            ),
+          ],
         )
       ],
     );
