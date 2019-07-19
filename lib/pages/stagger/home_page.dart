@@ -39,52 +39,54 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildAnimation(BuildContext context, Widget child, Size size) {
-    return Column(
+    return Stack(
       children: <Widget>[
-        SizedBox(
-          height: 250,
-          child: Stack(
-            overflow: Overflow.visible,
-            children: <Widget>[
-              topBar(widget.animation.barHeight.value),
-              circle(
-                size,
-                widget.animation.avatarSize.value,
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 60,
-              ),
-              Opacity(
-                opacity: widget.animation.titleOpacity.value,
-                child: placeholderBox(60, 100, Alignment.centerLeft),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Opacity(
-                  opacity: widget.animation.textOpacity.value,
-                  child: placeholderBox(200, 100, Alignment.centerRight))
-            ],
-          ),
-        ),
-        Stack(
+        Column(
           children: <Widget>[
-            Positioned(
-              child: Container(
-                width: 100,
-                height: 30,
-                color: Colors.blueAccent,
+            SizedBox(
+              height: 250,
+              child: Stack(
+                overflow: Overflow.visible,
+                children: <Widget>[
+                  topBar(widget.animation.barHeight.value),
+                  circle(
+                    size,
+                    widget.animation.avatarSize.value,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Opacity(
+                    opacity: widget.animation.titleOpacity.value,
+                    child: placeholderBox(60, 100, Alignment.centerLeft),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Opacity(
+                      opacity: widget.animation.textOpacity.value,
+                      child: placeholderBox(200, 100, Alignment.centerRight))
+                ],
               ),
             ),
           ],
-        )
+        ),
+        Positioned(
+          left: 30,
+          bottom: 100,
+          child: Container(
+            width: 100,
+            height: 180,
+            color: Colors.blueAccent,
+          ),
+        ),
       ],
     );
   }
