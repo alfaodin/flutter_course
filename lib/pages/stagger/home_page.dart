@@ -15,6 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Offset _offset = Offset.zero; // changed
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -44,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         Column(
           children: <Widget>[
             SizedBox(
-              height: 250,
+              height: 200,
               child: Stack(
                 overflow: Overflow.visible,
                 children: <Widget>[
@@ -80,11 +82,39 @@ class _HomePageState extends State<HomePage> {
         ),
         Positioned(
           left: 30,
-          bottom: 100,
-          child: Container(
-            width: 100,
-            height: 180,
-            color: Colors.blueAccent,
+          bottom: 60,
+          child: GestureDetector(
+            onPanUpdate: (details) {
+              print('Veamos');
+              setState(() => _offset += details.delta);
+            },
+            onDoubleTap: () => setState(() => _offset = Offset.zero),
+            child: Container(
+              width: 100,
+              height: 180,
+              color: Colors.blueAccent,
+              child: Transform(
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001) // perspective
+                  ..rotateX(0.05 * _offset.dy)
+                  ..rotateY(-0.05 * _offset.dx),
+                alignment: FractionalOffset.center,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        color: Colors.cyan,
+                        child: Text(
+                          '1',
+                          style: Theme.of(context).textTheme.display1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       ],
@@ -101,7 +131,7 @@ class _HomePageState extends State<HomePage> {
 
   Positioned circle(Size size, double animationValue) {
     return Positioned(
-      top: 200,
+      top: 100,
       left: size.width / 2 - 50,
       child: Transform(
         alignment: Alignment.center,
