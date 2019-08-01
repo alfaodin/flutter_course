@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hello_world/pages/home.dart';
+import 'package:hello_world/pages/main_menu/main_menu.dart';
 import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
 
 import 'dart:math';
@@ -57,9 +58,8 @@ class _MyAppState extends State<MyApp> {
       ),
       //home: Home(),
       routes: {
-        // '/': (BuildContext context) => AuthPage(),
-        '/': (BuildContext context) => StaggerPageAnimator(),
-
+        '/': (BuildContext context) => MainMenu(),
+        '/course': (BuildContext context) => AuthPage(),
         '/manager': (BuildContext context) =>
             ProductManager(_products, _addProduct, _deleteProduct),
         '/admin': (BuildContext context) => ProductAdmin(
