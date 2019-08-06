@@ -5,8 +5,9 @@ import 'package:hello_world/pages/products/product_list.dart';
 
 class ProductAdmin extends StatelessWidget {
   final Function createProductCallback;
+  final List<Map<String, dynamic>> products;
 
-  const ProductAdmin({Key key, this.createProductCallback}) : super(key: key);
+  const ProductAdmin(this.createProductCallback, this.products);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,9 @@ class ProductAdmin extends StatelessWidget {
               ProductCreate(
                 createProductCallback: createProductCallback,
               ),
-              ProductList(),
+              ProductList(
+                products: products,
+              ),
             ],
           )),
     );

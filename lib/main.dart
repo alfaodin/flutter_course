@@ -62,9 +62,8 @@ class _MyAppState extends State<MyApp> {
         '/course': (BuildContext context) => AuthPage(),
         '/manager': (BuildContext context) =>
             ProductManager(_products, _addProduct, _deleteProduct),
-        '/admin': (BuildContext context) => ProductAdmin(
-              createProductCallback: _addProduct,
-            ),
+        '/admin': (BuildContext context) =>
+            ProductAdmin(_addProduct, _products),
         '/music': (BuildContext context) => MusicHome(),
         '/splash': (BuildContext context) => Home(),
         '/stagger': (BuildContext context) => StaggerPageAnimator(),

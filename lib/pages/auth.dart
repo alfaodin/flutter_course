@@ -57,16 +57,34 @@ class _AuthPageState extends State<AuthPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    RaisedButton(
-                      child: Text('LOGIN'),
-                      onPressed: () {
-                        if (_formKey.currentState.validate() &&
-                            _formData['acceptTerms'] == true) {
-                          _formKey.currentState.save();
-                          print('email: ' + _formData['email']);
-                          Navigator.pushReplacementNamed(context, '/admin');
-                        }
-                      },
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        RaisedButton(
+                          child: Text('Fill'),
+                          onPressed: () {
+                            setState(() {
+                              _formData['acceptTerms'] = true;
+                              _formData['email'] = 'test@test.com';
+                              _formData['password'] = '123456789';
+                            });
+
+                            print("esta es una prueba ${_formData['email']}");
+                          },
+                        ),
+                        RaisedButton(
+                          child: Text('LOGIN'),
+                          onPressed: () {
+                            if (_formKey.currentState.validate() &&
+                                _formData['acceptTerms'] == true) {
+                              _formKey.currentState.save();
+                              print('email: ' + _formData['email']);
+                              Navigator.pushReplacementNamed(context, '/admin');
+                            }
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
