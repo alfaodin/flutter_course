@@ -10,7 +10,7 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final Map<String, dynamic> _formData = {
+  Map<String, dynamic> _formData = {
     'email': null,
     'password': null,
     'acceptTerms': false,
@@ -145,6 +145,7 @@ class _AuthPageState extends State<AuthPage> {
         fillColor: Colors.white,
       ),
       keyboardType: TextInputType.emailAddress,
+      initialValue: _formData['email'],
       onSaved: (String value) {
         _formData['email'] = value;
       },
