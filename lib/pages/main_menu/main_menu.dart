@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:hello_world/pages/main_menu/data/onboard-page-dat.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key key}) : super(key: key);
@@ -19,7 +20,7 @@ class _MainMenuState extends State<MainMenu>
     super.initState();
 
     controller =
-        AnimationController(duration: const Duration(seconds: 1), vsync: this);
+        AnimationController(duration: const Duration(seconds: 2), vsync: this);
     animation = Tween<double>(begin: -100, end: 0).animate(CurvedAnimation(
       parent: controller,
       curve: Curves.fastOutSlowIn,
@@ -49,9 +50,38 @@ class _MainMenuState extends State<MainMenu>
         body: Container(
           color: Colors.blueGrey,
           constraints: BoxConstraints.expand(),
-          child: _buildStaggerdGrid(context),
+          child: _buildDynamicGrid(context),
         ),
       ),
+    );
+  }
+
+  Widget _buildDynamicGrid(BuildContext context) {
+    return GridView.builder(
+      padding: EdgeInsets.symmetric(
+        horizontal: 26,
+        vertical: 20,
+      ),
+      itemBuilder: (BuildContext context, int position) {
+        return Transform.translate(
+          offset: Offset(animation.value, 0),
+          child: RaisedButton.icon(
+            color: mainMenuListData[position].mainColor,
+            icon: Icon(mainMenuListData[position].iconData),
+            label: Text(
+              mainMenuListData[position].label,
+              style: TextStyle(color: mainMenuListData[position].textColor),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(
+                  context, mainMenuListData[position].navigationPath);
+            },
+          ),
+        );
+      },
+      itemCount: mainMenuListData.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12),
     );
   }
 
