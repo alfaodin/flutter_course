@@ -63,8 +63,20 @@ class _MainMenuState extends State<MainMenu>
         vertical: 20,
       ),
       itemBuilder: (BuildContext context, int position) {
-        return Transform.translate(
-          offset: Offset(animation.value, 0),
+        double startTime = position / 7;
+        double endTime = position > 0 ? position / 5 : 0.25;
+
+        print('Prueba: ${startTime} - $endTime');
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset(-200.0, 0),
+            end: Offset(0.0, 0.0),
+          ).animate(
+            CurvedAnimation(
+              parent: controller,
+              curve: Interval(startTime, endTime, curve: Curves.linear),
+            ),
+          ),
           child: RaisedButton.icon(
             color: mainMenuListData[position].mainColor,
             icon: Icon(mainMenuListData[position].iconData),
