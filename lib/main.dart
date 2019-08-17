@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:hello_world/pages/domino/domino.dart';
 import 'package:hello_world/pages/home.dart';
 import 'package:hello_world/pages/main_menu/main_menu.dart';
 import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
@@ -67,6 +68,7 @@ class _MyAppState extends State<MyApp> {
         '/music': (BuildContext context) => MusicHome(),
         '/splash': (BuildContext context) => Home(),
         '/stagger': (BuildContext context) => StaggerPageAnimator(),
+        '/domino': (BuildContext context) => DominoAnimation(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');

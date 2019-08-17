@@ -45,4 +45,11 @@ List<MainMenuModel> mainMenuListData = [
     '/manager',
     Icons.memory,
   ),
+  MainMenuModel(
+    Color(0xFF005699),
+    Color(0xFFFFE074),
+    'Domino Animation',
+    '/domino',
+    Icons.memory,
+  ),
 ];
