@@ -52,4 +52,11 @@ List<MainMenuModel> mainMenuListData = [
     '/domino',
     Icons.memory,
   ),
+  MainMenuModel(
+    Color(0xFF39393A),
+    Color(0xFFE6E6E6),
+    'Mapa',
+    '/mapa',
+    Icons.map,
+  ),
 ];

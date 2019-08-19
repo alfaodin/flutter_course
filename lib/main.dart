@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:hello_world/pages/domino/domino.dart';
 import 'package:hello_world/pages/home.dart';
 import 'package:hello_world/pages/main_menu/main_menu.dart';
+import 'package:hello_world/pages/mapa/mapa.dart';
 import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
 
 import 'dart:math';
@@ -69,6 +70,7 @@ class _MyAppState extends State<MyApp> {
         '/splash': (BuildContext context) => Home(),
         '/stagger': (BuildContext context) => StaggerPageAnimator(),
         '/domino': (BuildContext context) => DominoAnimation(),
+        '/mapa': (BuildContext context) => MyMap(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
