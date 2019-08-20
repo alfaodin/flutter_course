@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MyMap extends StatelessWidget {
@@ -65,13 +66,176 @@ class _MapaState extends State<Mapa> {
               ],
             ),
           ),
-        )
+        ),
+        _buildListItems(),
+      ],
+    );
+  }
+
+  Widget _buildListItems() {
+    return Align(
+      alignment: Alignment.bottomLeft,
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 20),
+        height: 150,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: <Widget>[
+            SizedBox(
+              width: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: _boxes(
+                "https://lh5.googleusercontent.com/p/AF1QipMKRN-1zTYMUVPrH-CcKzfTo6Nai7wdL7D8PMkt=w340-h160-k-no",
+                40.761421,
+                -73.981667,
+                "Le Bernardin",
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _boxes(String _image, double lat, double long, String restaurantName) {
+    return GestureDetector(
+      onTap: () {
+        //_gotoLocation(lat, long);
+      },
+      child: Container(
+        child: new FittedBox(
+          child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    width: 180,
+                    height: 200,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child: Image(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(_image),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: myDetailsContainer1(restaurantName),
+                    ),
+                  ),
+                ],
+              )),
+        ),
+      ),
+    );
+  }
+
+  Widget myDetailsContainer1(String restaurantName) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Container(
+              child: Text(
+            restaurantName,
+            style: TextStyle(
+                color: Color(0xff6200ee),
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold),
+          )),
+        ),
+        SizedBox(height: 5.0),
+        Container(
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+                child: Text(
+              "4.1",
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18.0,
+              ),
+            )),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStar,
+                color: Colors.amber,
+                size: 15.0,
+              ),
+            ),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStar,
+                color: Colors.amber,
+                size: 15.0,
+              ),
+            ),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStar,
+                color: Colors.amber,
+                size: 15.0,
+              ),
+            ),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStar,
+                color: Colors.amber,
+                size: 15.0,
+              ),
+            ),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStarHalf,
+                color: Colors.amber,
+                size: 15.0,
+              ),
+            ),
+            Container(
+                child: Text(
+              "(946)",
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18.0,
+              ),
+            )),
+          ],
+        )),
+        SizedBox(height: 5.0),
+        Container(
+            child: Text(
+          "American \u00B7 \u0024\u0024 \u00B7 1.6 mi",
+          style: TextStyle(
+            color: Colors.black54,
+            fontSize: 18.0,
+          ),
+        )),
+        SizedBox(height: 5.0),
+        Container(
+            child: Text(
+          "Closed \u00B7 Opens 17:00 Thu",
+          style: TextStyle(
+              color: Colors.black54,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold),
+        )),
       ],
     );
   }
 
   Widget button(Function function, IconData icon) {
     return FloatingActionButton(
+      heroTag: 'btn1' + icon.toString(),
       onPressed: function,
       materialTapTargetSize: MaterialTapTargetSize.padded,
       backgroundColor: Colors.blue,
@@ -84,6 +248,7 @@ class _MapaState extends State<Mapa> {
 
   void _onMapCreatedCallback(GoogleMapController controller) {
     _mapController.complete(controller);
+    _onAddMarkerButtonPressed();
   }
 
   void _onCameraMoveCallback(CameraPosition position) {
@@ -98,14 +263,14 @@ class _MapaState extends State<Mapa> {
   _onAddMarkerButtonPressed() {
     setState(() {
       _markers.add(Marker(
-        markerId: MarkerId(_lastMapPosition.toString()),
-        position: _lastMapPosition,
-        infoWindow: InfoWindow(
-          title: 'This is a Title',
-          snippet: 'Es el Snipped',
-        ),
-        icon: BitmapDescriptor.defaultMarker,
-      ));
+          markerId: MarkerId(_lastMapPosition.toString()),
+          position: _lastMapPosition,
+          infoWindow: InfoWindow(
+            title: 'This is a Title',
+            snippet: 'Es el Snipped',
+          ),
+          icon: BitmapDescriptor.defaultMarker,
+          onTap: () => _onMarkerSelected(_lastMapPosition.toString())));
     });
   }
 
@@ -115,5 +280,19 @@ class _MapaState extends State<Mapa> {
           ? MapType.satellite
           : MapType.normal;
     });
+  }
+
+  void _onMarkerSelected(String coor) async {
+    print('Marker selected');
+    final GoogleMapController controller = await _mapController.future;
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext builder) {
+          return Container(
+            height: 120,
+            color: Colors.white,
+            child: Text("Bottom Sheet " + coor),
+          );
+        });
   }
 }
