@@ -59,4 +59,18 @@ List<MainMenuModel> mainMenuListData = [
     '/mapa',
     Icons.map,
   ),
+  MainMenuModel(
+    Color(0xFF005699),
+    Color(0xFFFFE074),
+    'Flip',
+    '/flip',
+    Icons.bookmark,
+  ),
+  MainMenuModel(
+    Color(0xFFE6E6E6),
+    Color(0xFF005699),
+    'Quiz',
+    '/quiz',
+    Icons.question_answer,
+  ),
 ];

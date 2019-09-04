@@ -63,10 +63,10 @@ class _MainMenuState extends State<MainMenu>
         vertical: 20,
       ),
       itemBuilder: (BuildContext context, int position) {
-        double startTime = position / 9;
-        double endTime = position > 0 ? position / 7 : 0.25;
+        double startTime = position / 11;
+        double endTime = position > 0 ? position / 9 : 0.25;
 
-        print('Prueba: ${startTime} - $endTime');
+        // print('Prueba: ${startTime} - $endTime');
         return SlideTransition(
           position: Tween<Offset>(
             begin: Offset(-200.0, 0),
