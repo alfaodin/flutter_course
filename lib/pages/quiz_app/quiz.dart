@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/pages/quiz_app/components/answer.dart';
-import 'package:hello_world/pages/quiz_app/components/question.dart';
+import 'package:hello_world/pages/quiz_app/components/quiz-content.dart';
+import 'package:hello_world/pages/quiz_app/components/result.dart';
 import 'package:hello_world/pages/quiz_app/data/questions-data.dart';
-import 'package:hello_world/pages/quiz_app/model/answer_model.dart';
 
 class QuizApp extends StatefulWidget {
   QuizApp({Key key}) : super(key: key);
@@ -19,20 +18,32 @@ class _QuizAppState extends State<QuizApp> {
       appBar: AppBar(
         title: Text('Prueba tu conocimiento'),
       ),
-      body: Container(
-        color: mainMenuListData[_questionIndex].backgroundColor,
-        child: Column(
-          children: <Widget>[
-            Question(
-              questionModel: mainMenuListData[_questionIndex],
-            ),
-            ...mainMenuListData[_questionIndex].answers.map((answerModel) {
-              return Answer(
-                  answerModel: answerModel,
-                  onSelectedCallback: _answerQuestion);
-            }).toList(),
-          ],
+      body: AnimatedContainer(
+        duration: Duration(
+          milliseconds: 750,
         ),
+        curve: Curves.easeInOut,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                _questionIndex < mainMenuListData.length
+                    ? mainMenuListData[_questionIndex]
+                        .backgroundColor
+                        .withAlpha(160)
+                    : Colors.yellowAccent.withAlpha(160),
+                _questionIndex < mainMenuListData.length
+                    ? mainMenuListData[_questionIndex].backgroundColor
+                    : Colors.yellowAccent
+              ]),
+        ),
+        child: _questionIndex < mainMenuListData.length
+            ? QuizContent(
+                answerQuestionFunct: _answerQuestion,
+                questionModel: mainMenuListData[_questionIndex],
+              )
+            : Result(),
       ),
     );
   }
