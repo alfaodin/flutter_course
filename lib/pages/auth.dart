@@ -115,6 +115,7 @@ class _AuthPageState extends State<AuthPage> {
         if (value.isEmpty || value.length < 5) {
           return 'Password must be at leats 5 characters.';
         }
+        return null;
       },
       keyboardType: TextInputType.text,
       obscureText: true,

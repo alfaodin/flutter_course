@@ -6,6 +6,7 @@ import 'package:hello_world/pages/quiz_app/quiz.dart';
 import 'package:hello_world/pages/domino/domino.dart';
 import 'package:hello_world/pages/main_menu/main_menu.dart';
 import 'package:hello_world/pages/custom_paint/flip_view.dart';
+import 'package:hello_world/pages/sqlLite/sqlLite.dart';
 import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
 
 import 'dart:math';
@@ -75,6 +76,7 @@ class _MyAppState extends State<MyApp> {
         '/mapa': (BuildContext context) => MyMap(),
         '/flip': (BuildContext context) => FlipView(),
         '/quiz': (BuildContext context) => QuizApp(),
+        '/sqlLite': (BuildContext context) => SqlLiteScreen(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');

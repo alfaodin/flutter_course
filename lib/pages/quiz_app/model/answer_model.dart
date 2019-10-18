@@ -1,5 +1,6 @@
 class AnswerModel {
   final String label;
+  final int score;
 
-  AnswerModel(this.label);
+  AnswerModel(this.label, this.score);
 }

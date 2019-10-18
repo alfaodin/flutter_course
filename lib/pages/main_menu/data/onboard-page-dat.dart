@@ -73,4 +73,11 @@ List<MainMenuModel> mainMenuListData = [
     '/quiz',
     Icons.question_answer,
   ),
+  MainMenuModel(
+    Color(0xFF005699),
+    Color(0xFFFFE074),
+    'Test SqlLite',
+    '/sqlLite',
+    Icons.storage,
+  ),
 ];

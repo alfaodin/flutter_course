@@ -63,8 +63,8 @@ class _MainMenuState extends State<MainMenu>
         vertical: 20,
       ),
       itemBuilder: (BuildContext context, int position) {
-        double startTime = position / 11;
-        double endTime = position > 0 ? position / 9 : 0.25;
+        double startTime = position / 12;
+        double endTime = position > 0 ? position / 10 : 0.25;
 
         // print('Prueba: ${startTime} - $endTime');
         return SlideTransition(

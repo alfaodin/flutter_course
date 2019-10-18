@@ -13,6 +13,7 @@ class QuizContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Question(
           questionModel: questionModel,
@@ -20,7 +21,7 @@ class QuizContent extends StatelessWidget {
         ...questionModel.answers.map((answerModel) {
           return Answer(
             answerModel: answerModel,
-            onSelectedCallback: answerQuestionFunct,
+            onSelectedCallback: () => answerQuestionFunct(answerModel),
           );
         }).toList(),
       ],

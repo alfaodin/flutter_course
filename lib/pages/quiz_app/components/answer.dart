@@ -16,6 +16,7 @@ class Answer extends StatelessWidget {
         color: Colors.blue[100],
         textColor: Colors.white,
         child: Text(answerModel.label),
+        // onPressed: () => onSelectedCallback(answerModel),
         onPressed: onSelectedCallback,
       ),
     );

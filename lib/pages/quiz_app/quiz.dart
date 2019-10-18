@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/pages/quiz_app/components/quiz-content.dart';
 import 'package:hello_world/pages/quiz_app/components/result.dart';
 import 'package:hello_world/pages/quiz_app/data/questions-data.dart';
+import 'package:hello_world/pages/quiz_app/model/answer_model.dart';
 
 class QuizApp extends StatefulWidget {
   QuizApp({Key key}) : super(key: key);
@@ -10,6 +11,7 @@ class QuizApp extends StatefulWidget {
 }
 
 class _QuizAppState extends State<QuizApp> {
+  var _toltalScore = 0;
   var _questionIndex = 0;
 
   @override
@@ -22,7 +24,7 @@ class _QuizAppState extends State<QuizApp> {
         duration: Duration(
           milliseconds: 750,
         ),
-        curve: Curves.easeInOut,
+        curve: Curves.easeInOutBack,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -43,13 +45,25 @@ class _QuizAppState extends State<QuizApp> {
                 answerQuestionFunct: _answerQuestion,
                 questionModel: mainMenuListData[_questionIndex],
               )
-            : Result(),
+            : Result(
+                userScore: _toltalScore,
+                onReset: restQuiz,
+              ),
       ),
     );
   }
 
-  void _answerQuestion() {
-    print(_questionIndex);
+  void restQuiz() {
+    setState(() {
+      _toltalScore = 0;
+      _questionIndex = 0;
+    });
+  }
+
+  void _answerQuestion(AnswerModel answerModel) {
+    print('Indice $_questionIndex valor de la respuesta ${answerModel.score}');
+    _toltalScore += answerModel.score;
+
     if (_questionIndex < mainMenuListData.length) {
       print('We have more questions!');
       setState(() {
