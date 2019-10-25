@@ -8,6 +8,7 @@ import 'package:hello_world/pages/main_menu/main_menu.dart';
 import 'package:hello_world/pages/custom_paint/flip_view.dart';
 import 'package:hello_world/pages/sqlLite/sqlLite.dart';
 import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
+import 'package:hello_world/pages/todo_sqflite/todo_crud.dart';
 
 import 'dart:math';
 import 'dart:async';
@@ -77,6 +78,7 @@ class _MyAppState extends State<MyApp> {
         '/flip': (BuildContext context) => FlipView(),
         '/quiz': (BuildContext context) => QuizApp(),
         '/sqlLite': (BuildContext context) => SqlLiteScreen(),
+        '/todo': (BuildContext context) => TodoCrud(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');

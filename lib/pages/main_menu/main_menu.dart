@@ -63,8 +63,8 @@ class _MainMenuState extends State<MainMenu>
         vertical: 20,
       ),
       itemBuilder: (BuildContext context, int position) {
-        double startTime = position / 12;
-        double endTime = position > 0 ? position / 10 : 0.25;
+        double startTime = position / 13;
+        double endTime = position > 0 ? position / 12 : 0.25;
 
         // print('Prueba: ${startTime} - $endTime');
         return SlideTransition(
@@ -93,7 +93,7 @@ class _MainMenuState extends State<MainMenu>
       },
       itemCount: mainMenuListData.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12),
+          crossAxisCount: 2, crossAxisSpacing: 13, mainAxisSpacing: 13),
     );
   }
 

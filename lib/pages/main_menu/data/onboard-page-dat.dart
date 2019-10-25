@@ -80,4 +80,11 @@ List<MainMenuModel> mainMenuListData = [
     '/sqlLite',
     Icons.storage,
   ),
+  MainMenuModel(
+    Color(0xFF005699),
+    Color(0xFFFFE074),
+    'TODO',
+    '/todo',
+    Icons.calendar_today,
+  ),
 ];
