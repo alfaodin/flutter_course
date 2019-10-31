@@ -87,4 +87,11 @@ List<MainMenuModel> mainMenuListData = [
     '/todo',
     Icons.calendar_today,
   ),
+  MainMenuModel(
+    Color(0xFF39393A),
+    Color(0xFFE6E6E6),
+    'Diseño Curvas',
+    '/curves',
+    Icons.blur_circular,
+  ),
 ];

@@ -4,11 +4,12 @@ import 'package:hello_world/pages/home.dart';
 import 'package:hello_world/pages/mapa/mapa.dart';
 import 'package:hello_world/pages/quiz_app/quiz.dart';
 import 'package:hello_world/pages/domino/domino.dart';
+import 'package:hello_world/pages/sqlLite/sqlLite.dart';
 import 'package:hello_world/pages/main_menu/main_menu.dart';
 import 'package:hello_world/pages/custom_paint/flip_view.dart';
-import 'package:hello_world/pages/sqlLite/sqlLite.dart';
-import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
 import 'package:hello_world/pages/todo_sqflite/todo_crud.dart';
+import 'package:hello_world/pages/curves_design/curve_design.dart';
+import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
 
 import 'dart:math';
 import 'dart:async';
@@ -79,6 +80,7 @@ class _MyAppState extends State<MyApp> {
         '/quiz': (BuildContext context) => QuizApp(),
         '/sqlLite': (BuildContext context) => SqlLiteScreen(),
         '/todo': (BuildContext context) => TodoCrud(),
+        '/curves': (BuildContext context) => CurveDesign(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
