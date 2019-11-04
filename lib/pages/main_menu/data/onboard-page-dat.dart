@@ -94,4 +94,11 @@ List<MainMenuModel> mainMenuListData = [
     '/curves',
     Icons.blur_circular,
   ),
+  MainMenuModel(
+    Color(0xFFFFE074),
+    Color(0xFF39393A),
+    'Mis gastos',
+    '/expenses',
+    Icons.account_balance_wallet,
+  ),
 ];

@@ -83,6 +83,7 @@ class _MainMenuState extends State<MainMenu>
             icon: Icon(mainMenuListData[position].iconData),
             label: Text(
               mainMenuListData[position].label,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(color: mainMenuListData[position].textColor),
             ),
             onPressed: () {

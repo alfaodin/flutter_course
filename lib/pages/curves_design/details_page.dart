@@ -198,7 +198,6 @@ class _DetailsPageState extends State<DetailsPage> {
             duration: Duration(milliseconds: 500),
             curve: Curves.easeIn,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
               color:
                   cardTitle == selectedCard ? Color(0xFF7A9BEE) : Colors.white,
               border: Border.all(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hello_world/pages/home.dart';
 import 'package:hello_world/pages/mapa/mapa.dart';
+import 'package:hello_world/pages/my_expenses/my_expenses.dart';
 import 'package:hello_world/pages/quiz_app/quiz.dart';
 import 'package:hello_world/pages/domino/domino.dart';
 import 'package:hello_world/pages/sqlLite/sqlLite.dart';
@@ -81,6 +82,7 @@ class _MyAppState extends State<MyApp> {
         '/sqlLite': (BuildContext context) => SqlLiteScreen(),
         '/todo': (BuildContext context) => TodoCrud(),
         '/curves': (BuildContext context) => CurveDesign(),
+        '/expenses': (BuildContext context) => MyExpenses(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
