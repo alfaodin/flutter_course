@@ -54,14 +54,22 @@ class _MyAppState extends State<MyApp> {
       title: 'test',
       theme: ThemeData(
         brightness: Brightness.light,
-        primarySwatch: Colors.deepOrange,
-        accentColor: Colors.deepPurple,
-        primaryColor: Colors.green,
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
         fontFamily: 'Oswald',
-        cardColor: Color.fromARGB(140, 255, 0, 0),
-        buttonTheme: ButtonThemeData(
-          buttonColor: Colors.yellow,
-          textTheme: ButtonTextTheme.primary,
+        textTheme: ThemeData.light().textTheme.copyWith(
+              title: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 18,
+              ),
+            ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 24,
+                ),
+              ),
         ),
       ),
       //home: Home(),

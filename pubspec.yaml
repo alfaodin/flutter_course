@@ -28,9 +28,10 @@ dependencies:
   font_awesome_flutter: ^8.2.0
   sqflite: ^1.1.7
 
-  fluttery: ^0.0.8
+  fluttery_dart2: ^0.0.9
   fluttery_audio: ^0.0.4
   flutter_staggered_grid_view: ^0.3.0
+  intl: ^0.16.0
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +62,7 @@ flutter:
     - assets/curve_design/plate4.png
     - assets/curve_design/plate5.png
     - assets/curve_design/plate6.png
+    - assets/images/waiting.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

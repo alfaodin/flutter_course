@@ -7,8 +7,8 @@ import 'package:hello_world/pages/music/songs.dart';
 import 'package:hello_world/theme/music_theme.dart';
 import 'package:hello_world/pages/music/songs_controls.dart';
 
-import 'package:fluttery/animations.dart';
-import 'package:fluttery/gestures.dart';
+import 'package:fluttery_dart2/animations.dart';
+import 'package:fluttery_dart2/gestures.dart';
 
 class MusicHome extends StatefulWidget {
   @override
