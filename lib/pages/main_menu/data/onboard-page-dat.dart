@@ -101,4 +101,11 @@ List<MainMenuModel> mainMenuListData = [
     '/expenses',
     Icons.account_balance_wallet,
   ),
+  MainMenuModel(
+    Color(0xFFE6E6E6),
+    Color(0xFF005699),
+    'Menu Radial',
+    '/radialMenu',
+    Icons.camera,
+  ),
 ];

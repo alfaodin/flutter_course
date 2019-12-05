@@ -30,6 +30,7 @@ dependencies:
 
   fluttery_dart2: ^0.0.9
   fluttery_audio: ^0.0.4
+  flutter_svg: ^0.15.0
   flutter_staggered_grid_view: ^0.3.0
   intl: ^0.16.0
 
@@ -63,6 +64,7 @@ flutter:
     - assets/curve_design/plate5.png
     - assets/curve_design/plate6.png
     - assets/images/waiting.png
+    - assets/radial_menu/decoration.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

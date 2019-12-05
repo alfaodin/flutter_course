@@ -5,8 +5,11 @@ import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> userTransactions;
+  final Function deleteTransaction;
+  GlobalKey<AnimatedListState> animatedListKey =
+      new GlobalKey<AnimatedListState>();
 
-  TransactionList(this.userTransactions);
+  TransactionList(this.userTransactions, this.deleteTransaction);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,6 @@ class TransactionList extends StatelessWidget {
 
   Widget expensesWidget(BuildContext context) {
     return Container(
-      height: 340,
       child: userTransactions.isEmpty
           ? buildNoTransactionImage(context)
           : buildTransactionList(),
@@ -44,59 +46,76 @@ class TransactionList extends StatelessWidget {
   }
 
   Widget buildTransactionList() {
-    return ListView.builder(
-      itemCount: userTransactions.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Card(
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                child: Text(
-                  '\$${userTransactions[index].amount.toStringAsFixed(2)}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).primaryColor,
-                    width: 2,
-                  ),
-                ),
-                padding: EdgeInsets.all(
-                  10,
+    return AnimatedList(
+      key: animatedListKey,
+      initialItemCount: userTransactions.length,
+      itemBuilder: (BuildContext context, int index, animation) {
+        return SizeTransition(
+          sizeFactor: animation,
+          child: buildTransactionItem(index, context),
+        );
+      },
+    );
+  }
+
+  Widget buildTransactionItem(int index, BuildContext context) {
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 30,
+          child: Padding(
+            padding: EdgeInsets.all(6),
+            child: FittedBox(
+              child: Text(
+                '\$${userTransactions[index].amount.toStringAsFixed(2)}',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    userTransactions[index].title,
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                  Text(
-                    //  new DateFormat.yMd()             -> 7/10/1996
-                    //  new DateFormat("yMd")            -> 7/10/1996
-                    //  new DateFormat.yMMMMd("en_US")   -> July 10, 1996
-                    //  new DateFormat.jm()              -> 5:08 PM
-                    //  new DateFormat.yMd().add_jm()    -> 7/10/1996 5:08 PM
-                    //  new DateFormat.Hm()              -> 17:08
-                    DateFormat('yyyy-MM-dd')
-                        .format(userTransactions[index].date),
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
+            ),
+          ),
+        ),
+        title: Text(
+          userTransactions[index].title,
+          style: Theme.of(context).textTheme.title,
+        ),
+        subtitle: Text(
+          //  new DateFormat.yMd()             -> 7/10/1996
+          //  new DateFormat("yMd")            -> 7/10/1996
+          //  new DateFormat.yMMMMd("en_US")   -> July 10, 1996
+          //  new DateFormat.jm()              -> 5:08 PM
+          //  new DateFormat.yMd().add_jm()    -> 7/10/1996 5:08 PM
+          //  new DateFormat.Hm()              -> 17:08
+          DateFormat('yyyy-MM-dd').format(userTransactions[index].date),
+          style: TextStyle(
+            fontSize: 12,
+          ),
+        ),
+        trailing: FittedBox(
+          child: Row(
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.delete),
+                color: Theme.of(context).errorColor,
+                tooltip: 'Borrar gasto',
+                onPressed: () {
+                  deleteTransaction(userTransactions[index]);
+                  print('DElete transaction');
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.edit),
+                tooltip: 'Editar gasto',
+                onPressed: () {
+                  print('Editar transaction');
+                },
               )
             ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

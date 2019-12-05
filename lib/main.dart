@@ -5,6 +5,7 @@ import 'package:hello_world/pages/mapa/mapa.dart';
 import 'package:hello_world/pages/my_expenses/my_expenses.dart';
 import 'package:hello_world/pages/quiz_app/quiz.dart';
 import 'package:hello_world/pages/domino/domino.dart';
+import 'package:hello_world/pages/radial_menu/radial_menu.dart';
 import 'package:hello_world/pages/sqlLite/sqlLite.dart';
 import 'package:hello_world/pages/main_menu/main_menu.dart';
 import 'package:hello_world/pages/custom_paint/flip_view.dart';
@@ -56,11 +57,15 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
+        errorColor: Colors.red.shade900,
         fontFamily: 'Oswald',
         textTheme: ThemeData.light().textTheme.copyWith(
               title: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 18,
+              ),
+              button: TextStyle(
+                color: Colors.white,
               ),
             ),
         appBarTheme: AppBarTheme(
@@ -91,6 +96,7 @@ class _MyAppState extends State<MyApp> {
         '/todo': (BuildContext context) => TodoCrud(),
         '/curves': (BuildContext context) => CurveDesign(),
         '/expenses': (BuildContext context) => MyExpenses(),
+        '/radialMenu': (BuildContext context) => RadialMenu(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');

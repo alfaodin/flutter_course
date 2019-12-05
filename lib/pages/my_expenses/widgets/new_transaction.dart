@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function onCreateFn;
@@ -10,14 +11,14 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
-  final titleController = TextEditingController();
-
-  final amountController = TextEditingController();
+  DateTime _selectedDate;
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
 
   @override
   void dispose() {
-    titleController.dispose();
-    amountController.dispose();
+    _titleController.dispose();
+    _amountController.dispose();
     super.dispose();
   }
 
@@ -38,21 +39,45 @@ class _NewTransactionState extends State<NewTransaction> {
               decoration: InputDecoration(
                 labelText: "Lugar de Gasto",
               ),
-              controller: titleController,
-              onSubmitted: (_) => onSaveNewTransaction(),
+              controller: _titleController,
+              onSubmitted: (_) => _onSaveNewTransaction(),
             ),
             TextField(
               decoration: InputDecoration(
                 labelText: "Cantidad",
               ),
-              controller: amountController,
+              controller: _amountController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => onSaveNewTransaction(),
+              onSubmitted: (_) => _onSaveNewTransaction(),
             ),
-            FlatButton(
+            Container(
+              height: 70,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    _selectedDate == null
+                        ? 'No date chosen'
+                        : 'Picked date: ${DateFormat.yMd().format(_selectedDate)}',
+                  ),
+                  FlatButton(
+                    textColor: Theme.of(context).primaryColor,
+                    child: Text(
+                      'Choose date',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      _presentDatePicker();
+                    },
+                  )
+                ],
+              ),
+            ),
+            RaisedButton(
               child: Text("Añadir gasto"),
-              onPressed: onSaveNewTransaction,
-              textColor: Colors.purple,
+              onPressed: _onSaveNewTransaction,
+              color: Theme.of(context).primaryColor,
+              textColor: Theme.of(context).textTheme.button.color,
             )
           ],
         ),
@@ -60,13 +85,35 @@ class _NewTransactionState extends State<NewTransaction> {
     );
   }
 
-  void onSaveNewTransaction() {
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse(amountController.text);
+  void _presentDatePicker() {
+    Future<DateTime> selectedTime = showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    );
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    selectedTime.then((time) {
+      if (time == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = time;
+      });
+    });
+  }
+
+  void _onSaveNewTransaction() {
+    if (_amountController.text.isEmpty) {
       return;
     }
-    this.widget.onCreateFn(enteredTitle, enteredAmount);
+    
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
+
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
+      return;
+    }
+    this.widget.onCreateFn(enteredTitle, enteredAmount, _selectedDate);
   }
 }
