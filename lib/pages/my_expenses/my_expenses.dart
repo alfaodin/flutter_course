@@ -70,6 +70,16 @@ class _MyExpensesState extends State<MyExpenses> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Show Dart'),
+              Switch(
+                value: true,
+                onChanged: (value) {},
+              ),
+            ],
+          ),
           //CHART
           Container(
             height: MediaQuery.of(context).size.height * .38 -

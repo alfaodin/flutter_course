@@ -108,4 +108,11 @@ List<MainMenuModel> mainMenuListData = [
     '/radialMenu',
     Icons.camera,
   ),
+  MainMenuModel(
+    Color(0xFFFFE074),
+    Color(0xFF39393A),
+    'SideBar Menu',
+    '/sidebarMenu',
+    Icons.flip_to_back,
+  ),
 ];

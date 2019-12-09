@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:hello_world/pages/home.dart';
 import 'package:hello_world/pages/mapa/mapa.dart';
 import 'package:hello_world/pages/my_expenses/my_expenses.dart';
 import 'package:hello_world/pages/quiz_app/quiz.dart';
 import 'package:hello_world/pages/domino/domino.dart';
 import 'package:hello_world/pages/radial_menu/radial_menu.dart';
+import 'package:hello_world/pages/sidebar_menu/sidebar_menu.dart';
 import 'package:hello_world/pages/sqlLite/sqlLite.dart';
 import 'package:hello_world/pages/main_menu/main_menu.dart';
 import 'package:hello_world/pages/custom_paint/flip_view.dart';
@@ -26,6 +28,10 @@ import 'package:hello_world/pages/products/product_admin.dart';
 
 main() {
   // debugPaintSizeEnabled = true;
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(new MyApp());
 }
 
@@ -52,7 +58,7 @@ class _MyAppState extends State<MyApp> {
     return new MaterialApp(
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
-      title: 'test',
+      title: 'Mis pruebas',
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.purple,
@@ -97,6 +103,7 @@ class _MyAppState extends State<MyApp> {
         '/curves': (BuildContext context) => CurveDesign(),
         '/expenses': (BuildContext context) => MyExpenses(),
         '/radialMenu': (BuildContext context) => RadialMenu(),
+        '/sidebarMenu': (BuildContext context) => SideBarMenu(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');

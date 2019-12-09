@@ -34,7 +34,7 @@ class _RadialMenuState extends State<RadialMenu> with TickerProviderStateMixin {
     _options.add(MenuOption('Menu 6', Icons.link_off));
     _controller = AnimationController(
       duration: Duration(
-        milliseconds: 500,
+        milliseconds: 1500,
       ),
       
       vsync: this,
