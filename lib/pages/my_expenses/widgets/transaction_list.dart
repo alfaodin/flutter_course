@@ -25,23 +25,27 @@ class TransactionList extends StatelessWidget {
   }
 
   Widget buildNoTransactionImage(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text(
-          'There are no transations',
-          style: Theme.of(context).textTheme.title,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Container(
-          height: 200,
-          child: Image.asset(
-            'assets/images/waiting.png',
-            fit: BoxFit.cover,
-          ),
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (ctx, constrains) {
+        return Column(
+          children: <Widget>[
+            Text(
+              'There are no transations',
+              style: Theme.of(context).textTheme.title,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: constrains.maxHeight * .6,
+              child: Image.asset(
+                'assets/images/waiting.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -96,15 +100,25 @@ class TransactionList extends StatelessWidget {
         trailing: FittedBox(
           child: Row(
             children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.delete),
-                color: Theme.of(context).errorColor,
-                tooltip: 'Borrar gasto',
-                onPressed: () {
-                  deleteTransaction(userTransactions[index]);
-                  print('DElete transaction');
-                },
-              ),
+              MediaQuery.of(context).size.width > 300
+                  ? FlatButton.icon(
+                      color: Theme.of(context).errorColor,
+                      icon: Icon(Icons.delete),
+                      label: Text('Borrar'),
+                      onPressed: () {
+                        deleteTransaction(userTransactions[index]);
+                        print('DElete transaction');
+                      },
+                    )
+                  : IconButton(
+                      icon: Icon(Icons.delete),
+                      color: Theme.of(context).errorColor,
+                      tooltip: 'Borrar gasto',
+                      onPressed: () {
+                        deleteTransaction(userTransactions[index]);
+                        print('DElete transaction');
+                      },
+                    ),
               IconButton(
                 icon: Icon(Icons.edit),
                 tooltip: 'Editar gasto',

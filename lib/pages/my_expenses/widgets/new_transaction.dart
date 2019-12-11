@@ -28,58 +28,65 @@ class _NewTransactionState extends State<NewTransaction> {
   }
 
   Widget inputExpenses() {
-    return Card(
-      elevation: 5,
-      child: Container(
-        margin: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Lugar de Gasto",
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          margin: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(
+                  labelText: "Lugar de Gasto",
+                ),
+                controller: _titleController,
+                onSubmitted: (_) => _onSaveNewTransaction(),
               ),
-              controller: _titleController,
-              onSubmitted: (_) => _onSaveNewTransaction(),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Cantidad",
+              TextField(
+                decoration: InputDecoration(
+                  labelText: "Cantidad",
+                ),
+                controller: _amountController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _onSaveNewTransaction(),
               ),
-              controller: _amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _onSaveNewTransaction(),
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    _selectedDate == null
-                        ? 'No date chosen'
-                        : 'Picked date: ${DateFormat.yMd().format(_selectedDate)}',
-                  ),
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    child: Text(
-                      'Choose date',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+              Container(
+                height: 70,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      _selectedDate == null
+                          ? 'No date chosen'
+                          : 'Picked date: ${DateFormat.yMd().format(_selectedDate)}',
                     ),
-                    onPressed: () {
-                      _presentDatePicker();
-                    },
-                  )
-                ],
+                    FlatButton(
+                      textColor: Theme.of(context).primaryColor,
+                      child: Text(
+                        'Choose date',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        _presentDatePicker();
+                      },
+                    )
+                  ],
+                ),
               ),
-            ),
-            RaisedButton(
-              child: Text("Añadir gasto"),
-              onPressed: _onSaveNewTransaction,
-              color: Theme.of(context).primaryColor,
-              textColor: Theme.of(context).textTheme.button.color,
-            )
-          ],
+              RaisedButton(
+                child: Text("Añadir gasto"),
+                onPressed: _onSaveNewTransaction,
+                color: Theme.of(context).primaryColor,
+                textColor: Theme.of(context).textTheme.button.color,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -107,7 +114,7 @@ class _NewTransactionState extends State<NewTransaction> {
     if (_amountController.text.isEmpty) {
       return;
     }
-    
+
     final enteredTitle = _titleController.text;
     final enteredAmount = double.parse(_amountController.text);
 

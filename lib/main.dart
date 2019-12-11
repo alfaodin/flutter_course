@@ -27,11 +27,14 @@ import 'package:hello_world/pages/music/music_home.dart';
 import 'package:hello_world/pages/products/product_admin.dart';
 
 main() {
+  // PERMITE DIBUJAR EN PATALLA LOS BOXES DE CADA WIDGET
   // debugPaintSizeEnabled = true;
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+
+  //PERMITE LIMITAR LA ROTACION DE LA PANTALLA
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
   runApp(new MyApp());
 }
 

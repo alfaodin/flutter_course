@@ -12,6 +12,9 @@ class MyExpenses extends StatefulWidget {
 }
 
 class _MyExpensesState extends State<MyExpenses> {
+  AppBar refAppBar;
+  bool _showChart = false;
+  bool _isLandscape = false;
   final List<Transaction> _userTransactions = [
     Transaction(
       id: '1',
@@ -33,10 +36,10 @@ class _MyExpensesState extends State<MyExpenses> {
     ),
   ];
 
-  AppBar refAppBar;
-
   @override
   Widget build(BuildContext context) {
+    _isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
     refAppBar = AppBar(
       title: Text('Mis Gastos'),
       actions: <Widget>[
@@ -66,39 +69,56 @@ class _MyExpensesState extends State<MyExpenses> {
   }
 
   Widget buildUI(BuildContext context) {
+    final txListWidget = Container(
+      height: MediaQuery.of(context).size.height * .62 -
+          refAppBar.preferredSize.height -
+          MediaQuery.of(context).padding.top,
+      child: TransactionList(
+        _userTransactions,
+        _deleteTransaction,
+      ),
+    );
+
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('Show Dart'),
-              Switch(
-                value: true,
-                onChanged: (value) {},
+          if (_isLandscape)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Show Dart'),
+                Switch(
+                  value: _showChart,
+                  onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+          if (!_isLandscape)
+            Container(
+              height: MediaQuery.of(context).size.height * .4 -
+                  refAppBar.preferredSize.height -
+                  MediaQuery.of(context).padding.top,
+              child: Chart(
+                _recentTransactions,
               ),
-            ],
-          ),
-          //CHART
-          Container(
-            height: MediaQuery.of(context).size.height * .38 -
-                refAppBar.preferredSize.height -
-                MediaQuery.of(context).padding.top,
-            child: Chart(
-              _recentTransactions,
             ),
-          ),
-          //LISTADO DE GASTOS
-          Container(
-            height: MediaQuery.of(context).size.height * .62 -
-                refAppBar.preferredSize.height -
-                MediaQuery.of(context).padding.top,
-            child: TransactionList(
-              _userTransactions,
-              _deleteTransaction,
-            ),
-          ),
+          if (!_isLandscape) txListWidget,
+          if (_isLandscape)
+            _showChart
+                ? Container(
+                    height: MediaQuery.of(context).size.height * .7 -
+                        refAppBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top,
+                    child: Chart(
+                      _recentTransactions,
+                    ),
+                  )
+                : txListWidget,
         ],
       ),
     );

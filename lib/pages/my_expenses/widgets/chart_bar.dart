@@ -31,7 +31,7 @@ class CharBar extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    height: 60,
+                    height: constrain.maxHeight * .6,
                     width: 10,
                     decoration: BoxDecoration(
                       border: Border.all(
