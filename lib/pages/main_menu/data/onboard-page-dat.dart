@@ -115,4 +115,11 @@ List<MainMenuModel> mainMenuListData = [
     '/sidebarMenu',
     Icons.flip_to_back,
   ),
+  MainMenuModel(
+    Color(0xFF39393A),
+    Color(0xFFE6E6E6),
+    'Custom Path',
+    '/customPath',
+    Icons.beach_access,
+  ),
 ];

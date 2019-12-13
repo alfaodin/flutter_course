@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:hello_world/pages/custom_path/custom_path.dart';
 import 'package:hello_world/pages/home.dart';
 import 'package:hello_world/pages/mapa/mapa.dart';
 import 'package:hello_world/pages/my_expenses/my_expenses.dart';
@@ -107,6 +108,7 @@ class _MyAppState extends State<MyApp> {
         '/expenses': (BuildContext context) => MyExpenses(),
         '/radialMenu': (BuildContext context) => RadialMenu(),
         '/sidebarMenu': (BuildContext context) => SideBarMenu(),
+        '/customPath': (BuildContext context) => CustomPath(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
