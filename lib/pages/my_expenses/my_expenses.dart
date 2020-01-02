@@ -11,7 +11,7 @@ class MyExpenses extends StatefulWidget {
   _MyExpensesState createState() => _MyExpensesState();
 }
 
-class _MyExpensesState extends State<MyExpenses> {
+class _MyExpensesState extends State<MyExpenses> with WidgetsBindingObserver {
   AppBar refAppBar;
   bool _showChart = false;
   bool _isLandscape = false;
@@ -35,6 +35,12 @@ class _MyExpensesState extends State<MyExpenses> {
       date: DateTime.now().subtract(Duration(days: 2)),
     ),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +74,12 @@ class _MyExpensesState extends State<MyExpenses> {
     );
   }
 
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   Widget buildUI(BuildContext context) {
     final txListWidget = Container(
       height: MediaQuery.of(context).size.height * .62 -
@@ -83,45 +95,59 @@ class _MyExpensesState extends State<MyExpenses> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          if (_isLandscape)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Show Dart'),
-                Switch(
-                  value: _showChart,
-                  onChanged: (value) {
-                    setState(() {
-                      _showChart = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-          if (!_isLandscape)
-            Container(
-              height: MediaQuery.of(context).size.height * .4 -
+          if (_isLandscape) ..._buildLandscapeContent(txListWidget),
+          if (!_isLandscape) ..._buildPortraitContent(txListWidget),
+        ],
+      ),
+    );
+  }
+
+  @override
+  didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+  List<Widget> _buildLandscapeContent(txListWidget) {
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text('Show Dart'),
+          Switch(
+            value: _showChart,
+            onChanged: (value) {
+              setState(() {
+                _showChart = value;
+              });
+            },
+          ),
+        ],
+      ),
+      _showChart
+          ? Container(
+              height: MediaQuery.of(context).size.height * .7 -
                   refAppBar.preferredSize.height -
                   MediaQuery.of(context).padding.top,
               child: Chart(
                 _recentTransactions,
               ),
-            ),
-          if (!_isLandscape) txListWidget,
-          if (_isLandscape)
-            _showChart
-                ? Container(
-                    height: MediaQuery.of(context).size.height * .7 -
-                        refAppBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top,
-                    child: Chart(
-                      _recentTransactions,
-                    ),
-                  )
-                : txListWidget,
-        ],
+            )
+          : txListWidget,
+    ];
+  }
+
+  List<Widget> _buildPortraitContent(txListWidget) {
+    return [
+      Container(
+        height: MediaQuery.of(context).size.height * .4 -
+            refAppBar.preferredSize.height -
+            MediaQuery.of(context).padding.top,
+        child: Chart(
+          _recentTransactions,
+        ),
       ),
-    );
+      txListWidget
+    ];
   }
 
   List<Transaction> get _recentTransactions {
