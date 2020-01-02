@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:hello_world/pages/custom_path/custom_path.dart';
 import 'package:hello_world/pages/home.dart';
 import 'package:hello_world/pages/mapa/mapa.dart';
+import 'package:hello_world/pages/meals/meals.dart';
 import 'package:hello_world/pages/my_expenses/my_expenses.dart';
 import 'package:hello_world/pages/quiz_app/quiz.dart';
 import 'package:hello_world/pages/domino/domino.dart';
@@ -109,6 +110,7 @@ class _MyAppState extends State<MyApp> {
         '/radialMenu': (BuildContext context) => RadialMenu(),
         '/sidebarMenu': (BuildContext context) => SideBarMenu(),
         '/customPath': (BuildContext context) => CustomPath(),
+        '/meals': (BuildContext context) => Meals(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');

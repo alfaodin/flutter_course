@@ -122,4 +122,11 @@ List<MainMenuModel> mainMenuListData = [
     '/customPath',
     Icons.beach_access,
   ),
+  MainMenuModel(
+    Colors.yellowAccent,
+    Colors.black,
+    'MEALS',
+    '/meals',
+    Icons.fastfood,
+  ),
 ];
