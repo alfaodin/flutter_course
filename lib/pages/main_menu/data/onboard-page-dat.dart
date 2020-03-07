@@ -129,4 +129,11 @@ List<MainMenuModel> mainMenuListData = [
     '/meals',
     Icons.fastfood,
   ),
+  MainMenuModel(
+    Color(0xFFE6E6E6),
+    Color(0xFF005699),
+    'Animation test',
+    '/iconAnimation',
+    Icons.insert_emoticon,
+  ),
 ];
