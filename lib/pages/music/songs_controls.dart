@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttery_audio/fluttery_audio.dart';
+// import 'package:fluttery_audio/fluttery_audio.dart';
 import 'package:hello_world/theme/music_theme.dart';
 
 class SongsControls extends StatelessWidget {
@@ -98,43 +98,44 @@ class PlayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AudioComponent(
-      updateMe: [WatchableAudioProperties.audioPlayerState],
-      playerBuilder: (BuildContext context, AudioPlayer player, Widget child) {
-        Function onPressed;
-        Color buttonColor = lightAccentColor;
-        IconData icon = Icons.music_note;
+    return Container();
+    // return AudioComponent(
+    //   updateMe: [WatchableAudioProperties.audioPlayerState],
+    //   playerBuilder: (BuildContext context, AudioPlayer player, Widget child) {
+    //     Function onPressed;
+    //     Color buttonColor = lightAccentColor;
+    //     IconData icon = Icons.music_note;
 
-        if (player.state == AudioPlayerState.playing) {
-          icon = Icons.pause;
-          onPressed = player.pause;
-          buttonColor = Colors.white;
-        } else if (player.state == AudioPlayerState.paused ||
-            player.state == AudioPlayerState.completed) {
-          icon = Icons.play_arrow;
-          onPressed = player.play;
-          buttonColor = Colors.white;
-        }
+    //     if (player.state == AudioPlayerState.playing) {
+    //       icon = Icons.pause;
+    //       onPressed = player.pause;
+    //       buttonColor = Colors.white;
+    //     } else if (player.state == AudioPlayerState.paused ||
+    //         player.state == AudioPlayerState.completed) {
+    //       icon = Icons.play_arrow;
+    //       onPressed = player.play;
+    //       buttonColor = Colors.white;
+    //     }
 
-        return RawMaterialButton(
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Icon(
-              icon,
-              color: Colors.red,
-              size: 35,
-            ),
-          ),
-          shape: CircleBorder(),
-          fillColor: buttonColor,
-          splashColor: lightAccentColor,
-          highlightColor: lightAccentColor.withOpacity(.5),
-          elevation: 10,
-          highlightElevation: 5,
-          onPressed: onPressed,
-        );
-      },
-    );
+    //     return RawMaterialButton(
+    //       child: Padding(
+    //         padding: EdgeInsets.all(8),
+    //         child: Icon(
+    //           icon,
+    //           color: Colors.red,
+    //           size: 35,
+    //         ),
+    //       ),
+    //       shape: CircleBorder(),
+    //       fillColor: buttonColor,
+    //       splashColor: lightAccentColor,
+    //       highlightColor: lightAccentColor.withOpacity(.5),
+    //       elevation: 10,
+    //       highlightElevation: 5,
+    //       onPressed: onPressed,
+    //     );
+    //   },
+    // );
   }
 }
 

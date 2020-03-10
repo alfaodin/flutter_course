@@ -143,8 +143,6 @@ class NoisePointer extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Random random = Random();
-
     Paint paint = Paint()..style = PaintingStyle.fill;
 
     for (var x = 0.0; x < size.width / blockSize; x++) {
@@ -162,7 +160,6 @@ class NoisePointer extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     return true;
   }
 }

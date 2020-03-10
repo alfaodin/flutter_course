@@ -29,7 +29,7 @@ dependencies:
   sqflite: ^1.1.7
 
   fluttery_dart2: ^0.0.9
-  fluttery_audio: ^0.0.4
+  # fluttery_audio: ^0.0.4
   flutter_svg: ^0.15.0
   flutter_staggered_grid_view: ^0.3.0
   intl: ^0.16.0
