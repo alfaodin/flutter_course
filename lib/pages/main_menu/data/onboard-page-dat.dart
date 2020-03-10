@@ -136,4 +136,11 @@ List<MainMenuModel> mainMenuListData = [
     '/iconAnimation',
     Icons.insert_emoticon,
   ),
+  MainMenuModel(
+    Colors.yellowAccent,
+    Colors.black,
+    'Star Field',
+    '/starField',
+    Icons.star,
+  ),
 ];

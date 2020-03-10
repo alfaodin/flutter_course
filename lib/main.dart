@@ -14,6 +14,7 @@ import 'package:hello_world/pages/sidebar_menu/sidebar_menu.dart';
 import 'package:hello_world/pages/sqlLite/sqlLite.dart';
 import 'package:hello_world/pages/main_menu/main_menu.dart';
 import 'package:hello_world/pages/custom_paint/flip_view.dart';
+import 'package:hello_world/pages/start_field/star_field.dart';
 import 'package:hello_world/pages/todo_sqflite/todo_crud.dart';
 import 'package:hello_world/pages/curves_design/curve_design.dart';
 import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
@@ -113,6 +114,7 @@ class _MyAppState extends State<MyApp> {
         '/customPath': (BuildContext context) => CustomPath(),
         '/meals': (BuildContext context) => Meals(),
         '/iconAnimation': (BuildContext context) => IconAnimation(),
+        '/starField': (BuildContext context) => StarField(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
