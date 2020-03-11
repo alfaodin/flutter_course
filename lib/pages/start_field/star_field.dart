@@ -18,7 +18,7 @@ class _StartFieldState extends State<StarField> {
   void initState() {
     super.initState();
 
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < 10; i++) {
       _stars.add(Star(300, 300));
     }
 
@@ -61,21 +61,7 @@ class _StartFieldState extends State<StarField> {
   }
 
   void _handleStarTick(Duration elapsed) {
-    setState(() {
-      // advanceStars(widget.starSpeed);
-    });
-  }
-
-  void advanceStars(double distance) {
-    // _stars.forEach((s) {
-    //   //Move stars on the z, and reset them when they reach the viewport
-    //   s.z -= distance; // * elapsed.inMilliseconds;
-    //   if (s.z < _minZ) {
-    //     _randomizeStar(s, false);
-    //   } else if (s.z > _maxZ) {
-    //     s.z = _minZ;
-    //   }
-    // });
+    setState(() {});
   }
 }
 
@@ -91,6 +77,12 @@ class StarFielPainter extends CustomPainter {
       _stars[i].update();
       _stars[i].show(canvas);
     }
+
+    canvas.drawCircle(Offset(-size.width / 2, -size.height / 2), 10,
+        Paint()..color = Colors.redAccent);
+    canvas.drawCircle(Offset(size.width / 2, size.height / 2), 10,
+        Paint()..color = Colors.redAccent);
+    canvas.drawCircle(Offset(0, 0), 10, Paint()..color = Colors.redAccent);
   }
 
   @override
@@ -113,23 +105,22 @@ class Star {
   }
 
   show(Canvas canvas) {
-    double sx = transform(x / z, 0, 1, 0, width);
-    double sy = transform(y / z, 0, 1, 0, height);
+    double sx = transform(x / z, 0, 1, 0, width / 2);
+    double sy = transform(y / z, 0, 1, 0, height / 2);
 
     canvas.drawCircle(Offset(sx, sy), 2, Paint()..color = Colors.white);
   }
 
   randomizeStar() {
-    this.x = (-width / 2) + Random().nextInt(width.toInt()).toDouble();
-    this.y = (-height / 2) + Random().nextInt(height.toInt()).toDouble();
-    this.z = Random().nextInt(width.toInt()).toDouble();
+    this.x = Random().nextInt(width ~/ 2).toDouble();
+    this.y = Random().nextInt(height ~/ 2).toDouble();
+    this.z = Random().nextInt(width ~/ 2).toDouble();
   }
 
   update() {
-    z = z - 0.01;
+    z = z - 1;
 
-    if ((x.abs() + z.abs()) > (this.width / 2) ||
-        (y.abs() + z.abs()) > (this.height / 2)) {
+    if ((x / z) > .95 || (y / z) > .95) {
       randomizeStar();
     }
   }
