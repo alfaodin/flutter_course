@@ -134,6 +134,7 @@ class Star {
 
   update() {
     z = z - 2;
+    pz = pz - .9;
 
     if ((z / 10) <= 1) {
       randomizeStar();
