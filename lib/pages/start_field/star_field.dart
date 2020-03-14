@@ -18,11 +18,17 @@ class _StartFieldState extends State<StarField> {
   void initState() {
     super.initState();
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 100; i++) {
       _stars.add(Star(300, 300));
     }
 
     _ticker = new Ticker(_handleStarTick)..start();
+  }
+
+  @override
+  void dispose() {
+    _ticker.dispose();
+    super.dispose();
   }
 
   @override
@@ -95,6 +101,7 @@ class Star {
   double x;
   double y;
   double z;
+  double pz;
   double width;
   double height;
 
@@ -108,19 +115,27 @@ class Star {
     double sx = transform(x / z, 0, 1, 0, width / 2);
     double sy = transform(y / z, 0, 1, 0, height / 2);
 
-    canvas.drawCircle(Offset(sx, sy), 2, Paint()..color = Colors.white);
+    double r = transform(z, 0, width, 4, 0);
+
+    canvas.drawCircle(Offset(sx, sy), r, Paint()..color = Colors.white);
+
+    double px = transform(x / pz, 0, 1, 0, width / 2);
+    double py = transform(y / pz, 0, 1, 0, height / 2);
+    canvas.drawLine(
+        Offset(px, py), Offset(sx, sy), Paint()..color = Colors.white);
   }
 
   randomizeStar() {
-    this.x = Random().nextInt(width ~/ 2).toDouble();
-    this.y = Random().nextInt(height ~/ 2).toDouble();
-    this.z = Random().nextInt(width ~/ 2).toDouble();
+    this.x = randomRange(-width ~/ 2, width ~/ 2).toDouble();
+    this.y = randomRange(-width ~/ 2, width ~/ 2).toDouble();
+    this.z = Random().nextInt(width.toInt()).toDouble();
+    this.pz = this.z;
   }
 
   update() {
-    z = z - 1;
+    z = z - 2;
 
-    if ((x / z) > .95 || (y / z) > .95) {
+    if ((z / 10) <= 1) {
       randomizeStar();
     }
   }
@@ -129,5 +144,12 @@ class Star {
       double n, double start1, double stop1, double start2, double stop2) {
     var newval = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
     return newval;
+  }
+
+  int randomRange(int min, int max) {
+    Random rnd;
+    rnd = new Random();
+    int result = min + rnd.nextInt(max - min);
+    return result;
   }
 }
