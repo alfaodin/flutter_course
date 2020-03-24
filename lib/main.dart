@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:hello_world/pages/color_menu/color_menu.dart';
 import 'package:hello_world/pages/custom_path/custom_path.dart';
 import 'package:hello_world/pages/home.dart';
 import 'package:hello_world/pages/icon_animation/icon_animation.dart';
@@ -115,6 +116,7 @@ class _MyAppState extends State<MyApp> {
         '/meals': (BuildContext context) => Meals(),
         '/iconAnimation': (BuildContext context) => IconAnimation(),
         '/starField': (BuildContext context) => StarField(),
+        '/colorMenu': (BuildContext context) => ColorMenu(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');

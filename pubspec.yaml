@@ -19,6 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^0.2.0
   google_maps_flutter: ^0.5.20+3
   provider: ^3.2.0
   http: ^0.12.0+2
@@ -68,6 +69,14 @@ flutter:
     - assets/curve_design/plate6.png
     - assets/images/waiting.png
     - assets/radial_menu/decoration.svg
+
+    - assets/color_menu/notification.png
+    - assets/color_menu/calendar.png
+    - assets/color_menu/festival.png
+    - assets/color_menu/food.png
+    - assets/color_menu/map.png
+    - assets/color_menu/setting.png
+    - assets/color_menu/todo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

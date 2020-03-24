@@ -143,4 +143,11 @@ List<MainMenuModel> mainMenuListData = [
     '/starField',
     Icons.star,
   ),
+  MainMenuModel(
+    Colors.yellowAccent,
+    Colors.black,
+    'Menu Colorido',
+    '/colorMenu',
+    Icons.menu,
+  ),
 ];

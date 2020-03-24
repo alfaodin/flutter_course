@@ -132,12 +132,14 @@ class _AuthPageState extends State<AuthPage> {
 
   TextFormField buildEmailInputTextField() {
     return TextFormField(
+      autovalidate: true,
       validator: (String value) {
-        if (value.isEmpty ||
+        if (value != null && value.isEmpty ||
             !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                 .hasMatch(value)) {
           return 'Description is Required an should be 10+ characters long.';
         }
+        return '';
       },
       textAlign: TextAlign.center,
       decoration: InputDecoration(
