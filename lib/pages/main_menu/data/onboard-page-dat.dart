@@ -150,4 +150,11 @@ List<MainMenuModel> mainMenuListData = [
     '/colorMenu',
     Icons.menu,
   ),
+  MainMenuModel(
+    Color(0xFFE6E6E6),
+    Color(0xFF005699),
+    'Page View',
+    '/pageViewBg',
+    Icons.hot_tub,
+  ),
 ];

@@ -78,6 +78,9 @@ flutter:
     - assets/color_menu/setting.png
     - assets/color_menu/todo.png
 
+    - assets/futbol/FGZ_bg_estadio_estadisticas.jpg
+    - assets/futbol/FGZ_over_cesped_estadisticas.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

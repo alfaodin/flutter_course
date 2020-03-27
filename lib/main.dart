@@ -1,29 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:hello_world/pages/color_menu/color_menu.dart';
-import 'package:hello_world/pages/custom_path/custom_path.dart';
-import 'package:hello_world/pages/home.dart';
-import 'package:hello_world/pages/icon_animation/icon_animation.dart';
-import 'package:hello_world/pages/mapa/mapa.dart';
-import 'package:hello_world/pages/meals/meals.dart';
-import 'package:hello_world/pages/my_expenses/my_expenses.dart';
-import 'package:hello_world/pages/quiz_app/quiz.dart';
-import 'package:hello_world/pages/domino/domino.dart';
-import 'package:hello_world/pages/radial_menu/radial_menu.dart';
-import 'package:hello_world/pages/sidebar_menu/sidebar_menu.dart';
-import 'package:hello_world/pages/sqlLite/sqlLite.dart';
-import 'package:hello_world/pages/main_menu/main_menu.dart';
-import 'package:hello_world/pages/custom_paint/flip_view.dart';
-import 'package:hello_world/pages/start_field/star_field.dart';
-import 'package:hello_world/pages/todo_sqflite/todo_crud.dart';
-import 'package:hello_world/pages/curves_design/curve_design.dart';
-import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
-
 import 'dart:math';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+
+import 'package:hello_world/pages/home.dart';
+import 'package:hello_world/pages/mapa/mapa.dart';
+import 'package:hello_world/pages/meals/meals.dart';
+import 'package:hello_world/pages/quiz_app/quiz.dart';
+import 'package:hello_world/pages/domino/domino.dart';
+import 'package:hello_world/pages/sqlLite/sqlLite.dart';
+import 'package:hello_world/pages/main_menu/main_menu.dart';
+import 'package:hello_world/pages/color_menu/color_menu.dart';
+import 'package:hello_world/pages/custom_paint/flip_view.dart';
+import 'package:hello_world/pages/start_field/star_field.dart';
+import 'package:hello_world/pages/todo_sqflite/todo_crud.dart';
+import 'package:hello_world/pages/my_expenses/my_expenses.dart';
+import 'package:hello_world/pages/custom_path/custom_path.dart';
+import 'package:hello_world/pages/radial_menu/radial_menu.dart';
+import 'package:hello_world/pages/sidebar_menu/sidebar_menu.dart';
+import 'package:hello_world/pages/curves_design/curve_design.dart';
+import 'package:hello_world/pages/icon_animation/icon_animation.dart';
+import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
+import 'package:hello_world/pages/page_view_background/page_view_background.dart';
 
 import 'package:hello_world/pages/auth.dart';
 import 'package:hello_world/product_manager.dart';
@@ -117,6 +118,7 @@ class _MyAppState extends State<MyApp> {
         '/iconAnimation': (BuildContext context) => IconAnimation(),
         '/starField': (BuildContext context) => StarField(),
         '/colorMenu': (BuildContext context) => ColorMenu(),
+        '/pageViewBg': (BuildContext context) => PageViewBackground(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
