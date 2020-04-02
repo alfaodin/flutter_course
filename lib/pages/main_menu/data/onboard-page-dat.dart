@@ -157,4 +157,11 @@ List<MainMenuModel> mainMenuListData = [
     '/pageViewBg',
     Icons.hot_tub,
   ),
+  MainMenuModel(
+    Color(0xFF39393A),
+    Color(0xFFE6E6E6),
+    'Complex UI',
+    '/complexUI',
+    Icons.favorite,
+  ),
 ];

@@ -24,6 +24,7 @@ import 'package:hello_world/pages/sidebar_menu/sidebar_menu.dart';
 import 'package:hello_world/pages/curves_design/curve_design.dart';
 import 'package:hello_world/pages/icon_animation/icon_animation.dart';
 import 'package:hello_world/pages/stagger/stagger_animation_page.dart';
+import 'package:hello_world/pages/complex_ui_animation/complex_ui.dart';
 import 'package:hello_world/pages/page_view_background/page_view_background.dart';
 
 import 'package:hello_world/pages/auth.dart';
@@ -119,6 +120,7 @@ class _MyAppState extends State<MyApp> {
         '/starField': (BuildContext context) => StarField(),
         '/colorMenu': (BuildContext context) => ColorMenu(),
         '/pageViewBg': (BuildContext context) => PageViewBackground(),
+        '/complexUI': (BuildContext context) => ComplexUI(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');

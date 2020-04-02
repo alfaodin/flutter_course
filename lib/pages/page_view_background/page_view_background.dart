@@ -107,11 +107,15 @@ class SoccerBall extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<PageOffsetNotifier>(
       builder: (context, notifier, child) {
+        double ballPosition =
+            (MediaQuery.of(context).size.width * notifier.page.round()) +
+                MediaQuery.of(context).size.width * .2;
         print(
-            'offset ${notifier.offset} pagina ${notifier.page} width ${MediaQuery.of(context).size.width}');
+            'offset ${notifier.offset} pagina ${notifier.page} width ${MediaQuery.of(context).size.width} y resultados $ballPosition');
+
         return Positioned(
           top: 100,
-          left: 10 + notifier.offset / (notifier.page + 2),
+          left: MediaQuery.of(context).size.width * .2,
           child: Container(
             width: 60,
             height: 60,
