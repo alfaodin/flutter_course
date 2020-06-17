@@ -164,4 +164,11 @@ List<MainMenuModel> mainMenuListData = [
     '/complexUI',
     Icons.favorite,
   ),
+  MainMenuModel(
+    Colors.yellowAccent,
+    Colors.black,
+    'Reloj',
+    '/clock',
+    Icons.menu,
+  ),
 ];

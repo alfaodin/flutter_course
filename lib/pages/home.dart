@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
         title: Text('Hello World2'),
       ),
       body: ChangeNotifierProvider(
-        builder: (context) => ColorProvider(),
+        create: (context) => ColorProvider(),
         child: IntroducctionPage(),
       ),
     );

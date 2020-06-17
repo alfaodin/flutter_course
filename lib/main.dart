@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 
 import 'package:hello_world/pages/home.dart';
 import 'package:hello_world/pages/mapa/mapa.dart';
+import 'package:hello_world/pages/clock/clock.dart';
 import 'package:hello_world/pages/meals/meals.dart';
 import 'package:hello_world/pages/quiz_app/quiz.dart';
 import 'package:hello_world/pages/domino/domino.dart';
@@ -121,6 +122,7 @@ class _MyAppState extends State<MyApp> {
         '/colorMenu': (BuildContext context) => ColorMenu(),
         '/pageViewBg': (BuildContext context) => PageViewBackground(),
         '/complexUI': (BuildContext context) => ComplexUI(),
+        '/clock': (BuildContext context) => ClockScren(),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
